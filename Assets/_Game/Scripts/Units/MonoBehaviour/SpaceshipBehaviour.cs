@@ -17,4 +17,9 @@ public class SpaceshipBehaviour : UnitBehaviour
     {
         
     }
+
+    public void ApplyDamage(int damage)
+    {
+
+    }
 }
