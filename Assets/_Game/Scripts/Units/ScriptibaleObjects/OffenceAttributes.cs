@@ -7,13 +7,16 @@ public class OffenceAttributes : ArmedUnitAttributes
 {
 
     [SerializeField]
-    public int shield;
+    private int _shield;
+    public int ShieldValue => _shield;
 
     [SerializeField]
-    public float speed;
+    private float _speed;
+    public float SpeedValue => SpeedValue;
 
     [SerializeField]
-    public int health;
+    private int _health;
+    public int HealthValue => _health;
 
 
 }

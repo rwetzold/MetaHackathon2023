@@ -6,12 +6,17 @@ using UnityEngine;
 public class ArmedUnitAttributes : UnitAttributes
 {
     [SerializeField]
-    public int damage;
+    private int _damage;
+    public int DamageValue => _damage;
 
     [SerializeField]
-    public int range;
+    private int _range;
+    public int RangeValue => _range;
 
     [SerializeField]
-    public float fireRate;
+    private float _fireRate;
+    public float FireRageValue => _fireRate;
+
+
 
 }

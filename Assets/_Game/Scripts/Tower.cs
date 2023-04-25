@@ -13,15 +13,12 @@ public class Tower : MonoBehaviour
     private void Start()
     {
         defenceAttributes = new DefenceAttributes();
-        defenceAttributes.range = 10;
-        defenceAttributes.damage = 1;
-        defenceAttributes.fireRate = 1.0f;
         _hits = new Collider[MAX_COLLIDERS];
     }
 
     private void Update()
     {
-        int colliders = Physics.OverlapSphereNonAlloc(transform.position, defenceAttributes.range, _hits, 1 << ENEMY_LAYER);
+        int colliders = Physics.OverlapSphereNonAlloc(transform.position, defenceAttributes.RangeValue, _hits, 1 << ENEMY_LAYER);
         for (int i = 0; i < colliders; i++)
         {
             Debug.DrawLine(transform.position, _hits[i].ClosestPoint(transform.position));
