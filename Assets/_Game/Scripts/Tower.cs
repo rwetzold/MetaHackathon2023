@@ -5,9 +5,9 @@ public class Tower : MonoBehaviour
     private const int MAX_COLLIDERS = 10;
     private const int ENEMY_LAYER = 6;
 
-    [SerializeField] private float damage = 1f;
-    [SerializeField] private float range = 1f;
-    [SerializeField] private float fireRate = 1f;
+    [SerializeField]
+    private DefenceAttributes defenceAttributes;
+
 
     private Collider[] _hits;
 
@@ -18,7 +18,7 @@ public class Tower : MonoBehaviour
 
     private void Update()
     {
-        int colliders = Physics.OverlapSphereNonAlloc(transform.position, range, _hits, 1 << ENEMY_LAYER);
+        int colliders = Physics.OverlapSphereNonAlloc(transform.position, defenceAttributes.range, _hits, 1 << ENEMY_LAYER);
         for (int i = 0; i < colliders; i++)
         {
             Debug.DrawLine(transform.position, _hits[i].ClosestPoint(transform.position));
