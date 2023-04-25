@@ -6,4 +6,8 @@ using UnityEngine;
 
 public class UnitAttributes : ScriptableObject
 {
+    [SerializeField]
+    private float _priceValue;
+
+    public float PriceValue => _priceValue;
 }
