@@ -2,7 +2,6 @@ using UnityEngine;
 
 public abstract class UnitBehaviour : MonoBehaviour
 {
-    [SerializeField] private UnitAttributes _attributes;
+    [SerializeField] protected UnitAttributes _attributes;
     public GameObject ownerPlayer;
-
 }
