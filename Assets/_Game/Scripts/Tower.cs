@@ -8,11 +8,14 @@ public class Tower : MonoBehaviour
     [SerializeField]
     private DefenceAttributes defenceAttributes;
 
-
     private Collider[] _hits;
 
     private void Start()
     {
+        defenceAttributes = new DefenceAttributes();
+        defenceAttributes.range = 10;
+        defenceAttributes.damage = 1;
+        defenceAttributes.fireRate = 1.0f;
         _hits = new Collider[MAX_COLLIDERS];
     }
 
