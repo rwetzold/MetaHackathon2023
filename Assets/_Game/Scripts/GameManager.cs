@@ -1,31 +1,38 @@
 using UnityEngine;
 
-public class GameManager : Singleton<GameManager>
+namespace Hackathon
 {
-    public enum GameState
+    public class GameManager : Singleton<GameManager>
     {
-        Lobby,
-        InGame,
-        GameOver
-    }
+        public enum GameState
+        {
+            Lobby,
+            InGame,
+            GameOver
+        }
 
-    [SerializeField] private NetworkManager networkManager;
+        [SerializeField] private NetworkManager networkManager;
 
-    private GameState _gameState;
+        [Header("Static references")] public Transform playerHead;
+        public Transform leftHand;
+        public Transform rightHand;
 
-    private void Start()
-    {
-        _gameState = GameState.Lobby;
-        networkManager.OnPlayersReady += OnPlayersReady;
-    }
+        private GameState _gameState;
 
-    private void OnPlayersReady()
-    {
-        StartGame();
-    }
+        private void Start()
+        {
+            _gameState = GameState.Lobby;
+            networkManager.OnPlayersReady += OnPlayersReady;
+        }
 
-    private void StartGame()
-    {
-        _gameState = GameState.InGame;
+        private void OnPlayersReady()
+        {
+            StartGame();
+        }
+
+        private void StartGame()
+        {
+            _gameState = GameState.InGame;
+        }
     }
 }

@@ -2,32 +2,35 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class SpawnManager : MonoBehaviour
+namespace Hackathon
 {
-    [SerializeField] private Transform spawnPoint;
-    [SerializeField] private Transform targetPoint;
-    [SerializeField] private SpawnRule[] spawnRules;
-
-    private void Start()
+    public class SpawnManager : MonoBehaviour
     {
-        foreach (SpawnRule rule in spawnRules)
+        [SerializeField] private Transform spawnPoint;
+        [SerializeField] private Transform targetPoint;
+        [SerializeField] private SpawnRule[] spawnRules;
+
+        private void Start()
         {
-            StartCoroutine(DoSpawning(rule));
+            foreach (SpawnRule rule in spawnRules)
+            {
+                StartCoroutine(DoSpawning(rule));
+            }
         }
-    }
 
-    private IEnumerator DoSpawning(SpawnRule rule)
-    {
-        yield return new WaitForSeconds(rule.initialDelay);
-
-        do
+        private IEnumerator DoSpawning(SpawnRule rule)
         {
-            GameObject go = Instantiate(rule.prefab);
-            go.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
-            NavMeshAgent agent = go.GetComponentInChildren<NavMeshAgent>();
-            agent.SetDestination(targetPoint.position);
+            yield return new WaitForSeconds(rule.initialDelay);
 
-            yield return new WaitForSeconds(rule.delay);
-        } while (true);
+            do
+            {
+                GameObject go = Instantiate(rule.prefab);
+                go.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
+                NavMeshAgent agent = go.GetComponentInChildren<NavMeshAgent>();
+                agent.SetDestination(targetPoint.position);
+
+                yield return new WaitForSeconds(rule.delay);
+            } while (true);
+        }
     }
 }
