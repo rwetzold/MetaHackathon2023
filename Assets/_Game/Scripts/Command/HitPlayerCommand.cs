@@ -19,6 +19,7 @@ namespace Hackathon.Commands
         public void Execute()
         {
             _playerBehaviour.ApplyDamage(_spaceship.currentHealth);
+            _spaceship.Destroy();
         }
     }
 }
