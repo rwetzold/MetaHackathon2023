@@ -32,12 +32,12 @@ namespace Hackathon
                 return;
             }
 
-            _spawnTime += Time.deltaTime;
-            if (_spawnTime >= FactoryAttributes.SpawnRate)
-            {
-                InstantiateSpaceship();
-                _spawnTime = 0;
-            }
+            //_spawnTime += Time.deltaTime;
+            //if (_spawnTime >= FactoryAttributes.SpawnRate)
+            //{
+            //    InstantiateSpaceship();
+            //    _spawnTime = 0;
+            //}
         }
 
         private void InstantiateSpaceship()
