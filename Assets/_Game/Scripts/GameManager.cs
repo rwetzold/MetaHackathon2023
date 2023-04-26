@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Hackathon
 {
@@ -15,6 +16,8 @@ namespace Hackathon
         public Transform leftHand;
         public Transform rightHand;
 
+        [Header("Events")] public UnityEvent OnGameStart;
+
         private GameState _gameState;
 
         private void Start()
@@ -25,26 +28,27 @@ namespace Hackathon
         public void StartGame()
         {
             _gameState = GameState.InGame;
+            OnGameStart?.Invoke();
         }
 
         public void CreateTowerCommand()
         {
             Debug.Log("Create Tower");
         }
-        
+
         public void ModifyTowerCommand()
         {
             Debug.Log("Modify Tower");
         }
-        
+
         public void DeleteTowerCommand()
         {
             Debug.Log("Delete Tower");
         }
-        
+
         public void CreateFactoryCommand()
         {
             Debug.Log("Create Factory");
-        }        
+        }
     }
 }
