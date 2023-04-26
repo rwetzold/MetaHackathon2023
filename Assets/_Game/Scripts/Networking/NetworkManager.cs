@@ -121,7 +121,8 @@ namespace Hackathon
                 AddToUsernameList(player.NickName);
             }
 
-            PhotonNetwork.Instantiate("NetworkPlayer", Vector3.zero, Quaternion.identity);
+            GameObject go = PhotonNetwork.Instantiate("NetworkPlayer", Vector3.zero, Quaternion.identity);
+            GameManager.Instance.remotePlayer = go.transform;
 
             GameObject sceneCaptureController = GameObject.Find("SceneModel");
             if (sceneCaptureController)

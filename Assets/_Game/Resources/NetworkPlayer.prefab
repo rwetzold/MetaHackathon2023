@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6464938100083122468}
   - component: {fileID: 4606208773539670203}
   - component: {fileID: 1560528339273220369}
+  - component: {fileID: 7058151856403789085}
   m_Layer: 0
   m_Name: NetworkPlayer
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6182767179896171723}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.4182944, y: -1.0753403, z: -0.40973377}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -74,3 +75,17 @@ MonoBehaviour:
     type: 3}
   rightPrefab: {fileID: 7271330210785046165, guid: a723d712652a0434f92d450305e1bf4c,
     type: 3}
+--- !u!136 &7058151856403789085
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6182767179896171723}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.4
+  m_Height: 2.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
