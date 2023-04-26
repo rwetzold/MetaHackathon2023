@@ -1,3 +1,5 @@
+using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -15,6 +17,7 @@ namespace Hackathon
         [Header("Static references")] public Transform playerHead;
         public Transform leftHand;
         public Transform rightHand;
+        public TextMeshPro countdown;
 
         [Header("Runtime")] public PlayerBehaviour remotePlayer;
 
@@ -25,10 +28,27 @@ namespace Hackathon
         private void Start()
         {
             _gameState = GameState.Lobby;
+
+            countdown.gameObject.SetActive(true);
+            countdown.text = "Waiting for other player...";
         }
 
         public void StartGame()
         {
+            StartCoroutine(StartCountdown());
+        }
+
+        private IEnumerator StartCountdown()
+        {
+            countdown.gameObject.SetActive(true);
+            for (int i = 3; i >= 0; i--)
+            {
+                countdown.text = i == 0 ? "GO!" : i.ToString();
+                yield return new WaitForSeconds(1f);
+            }
+
+            countdown.gameObject.SetActive(false);
+
             _gameState = GameState.InGame;
             OnGameStart?.Invoke();
         }
