@@ -16,6 +16,9 @@ namespace Hackathon
         private float _spawnTime;
         private List<GameObject> _spaceshipPool;
 
+        [SerializeField]
+        private bool _spwanOnAwake =false;
+
         public PlayerBehaviour target => _target;
         public FactoryAttributes FactoryAttributes => (FactoryAttributes)_attributes;
 
@@ -25,6 +28,7 @@ namespace Hackathon
             _spawnTime = 0;
             _spaceshipPool = new List<GameObject>();
 
+            _canSpawn = _spwanOnAwake;
             for (var i = 0; i < FactoryAttributes.PollSize; i++)
             {
                 var spaceship = Instantiate(FactoryAttributes.PrefabUnit);

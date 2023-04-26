@@ -74,15 +74,15 @@ namespace Hackathon
             _currentHealth -= damage;
             if (_currentHealth <= 0)
             {
-                Destroy(this.gameObject);
+                KillIt();
                 return true;
             }
             return false;
         }
 
-        public void Destroy()
+        public void KillIt()
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
 
         void OnCollisionEnter(Collision collision)

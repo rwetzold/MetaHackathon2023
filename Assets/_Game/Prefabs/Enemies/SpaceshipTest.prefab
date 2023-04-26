@@ -71,7 +71,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ownerPlayer: {fileID: 0}
-  _attributes: {fileID: 0}
+  _attributes: {fileID: 11400000, guid: 1f0eae9d25226ad4b94a8cb5a7a6a842, type: 2}
   _target: {fileID: 0}
   _factory: {fileID: 0}
 --- !u!1 &5180627394389906931
