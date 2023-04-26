@@ -44,7 +44,7 @@ public class PlayerBehaviour : MonoBehaviour
         _currentCurrency += coins;
     }
 
-    public bool Pay(int price)
+    public bool TryPay(int price)
     {
         if (price > currentCurrency)
             return false;
