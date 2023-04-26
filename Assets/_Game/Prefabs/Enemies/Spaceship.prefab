@@ -53,6 +53,7 @@ MonoBehaviour:
   _damagePhase02: {fileID: 5493675189214238218}
   _damagePhase03: {fileID: 5493413988679612903}
   _damageDeath: {fileID: 5494028571831188684}
+  _body: {fileID: 4682367151035232037}
   _factory: {fileID: 0}
 --- !u!195 &-460654227519140666
 NavMeshAgent:
@@ -199,7 +200,7 @@ PrefabInstance:
     - target: {fileID: 6042831615166367770, guid: 5f868146b650e4c488b07747d3332db4,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6042831615166367770, guid: 5f868146b650e4c488b07747d3332db4,
         type: 3}
@@ -209,7 +210,7 @@ PrefabInstance:
     - target: {fileID: 6042831615166367770, guid: 5f868146b650e4c488b07747d3332db4,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6042831615166367770, guid: 5f868146b650e4c488b07747d3332db4,
         type: 3}
@@ -264,12 +265,38 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2298531918373989582}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4682367151035232037 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6853663377650975723, guid: 5f868146b650e4c488b07747d3332db4,
+    type: 3}
+  m_PrefabInstance: {fileID: 2298531918373989582}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5492832216459896020 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6042831615166367770, guid: 5f868146b650e4c488b07747d3332db4,
     type: 3}
   m_PrefabInstance: {fileID: 2298531918373989582}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5492832216459896021 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6042831615166367771, guid: 5f868146b650e4c488b07747d3332db4,
+    type: 3}
+  m_PrefabInstance: {fileID: 2298531918373989582}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &5304840410985388095
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5492832216459896021}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.4
+  m_Height: 1
+  m_Direction: 2
+  m_Center: {x: 0, y: 0.3, z: 0}
 --- !u!1 &5493413988679612903 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6042283072168973609, guid: 5f868146b650e4c488b07747d3332db4,
