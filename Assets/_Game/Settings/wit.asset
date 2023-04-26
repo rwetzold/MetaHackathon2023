@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae5a46bda3295124c99b0e6537ac7252, type: 3}
-  m_Name: wit
+  m_Name: Wit
   m_EditorClassIdentifier: 
   _clientAccessToken: NGUEZKCE7YJAUH4RIH4EBK2EO5MUA3FA
   _appInfo:

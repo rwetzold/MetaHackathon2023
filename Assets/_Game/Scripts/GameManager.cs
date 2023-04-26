@@ -1,4 +1,6 @@
 using System.Collections;
+using Meta.WitAi.TTS.Utilities;
+using Photon.Pun;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -18,6 +20,7 @@ namespace Hackathon
         public Transform leftHand;
         public Transform rightHand;
         public TextMeshPro countdown;
+        public TTSSpeaker tts;
 
         [Header("Runtime")] public PlayerBehaviour remotePlayer;
 
@@ -40,6 +43,7 @@ namespace Hackathon
 
         private IEnumerator StartCountdown()
         {
+            tts.Speak("Get ready " + PhotonNetwork.NickName + ". Starting Game!");
             countdown.gameObject.SetActive(true);
             for (int i = 3; i >= 0; i--)
             {
