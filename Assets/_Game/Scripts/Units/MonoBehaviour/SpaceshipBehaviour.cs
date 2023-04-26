@@ -94,11 +94,6 @@ namespace Hackathon
                     {
                         if (_currentHealth <= 0)
                         {
-                            _damagePhase01.SetActive(false);
-                            _damagePhase02.SetActive(false);
-                            _damagePhase03.SetActive(false);
-                            _damageDeath.SetActive(true);
-                            _body.SetActive(false);
                             KillIt();
                             return true;
                         }
@@ -141,6 +136,11 @@ namespace Hackathon
 
         IEnumerator KillSlow()
         {
+            _damagePhase01.SetActive(false);
+            _damagePhase02.SetActive(false);
+            _damagePhase03.SetActive(false);
+            _damageDeath.SetActive(true);
+            _body.SetActive(false);
             yield return new WaitForSeconds(0.5f);
             _damagePhase01.SetActive(false);
             _damagePhase02.SetActive(false);
