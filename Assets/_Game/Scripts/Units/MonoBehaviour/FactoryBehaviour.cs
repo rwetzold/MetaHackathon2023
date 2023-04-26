@@ -15,6 +15,7 @@ namespace Hackathon
         private bool _canSpawn = false;
         private float _spawnTime;
         private List<GameObject> _spaceshipPool;
+        private Animator _animator;
 
         public PlayerBehaviour target => _target;
         public FactoryAttributes FactoryAttributes => (FactoryAttributes)_attributes;
@@ -24,6 +25,7 @@ namespace Hackathon
         {
             _spawnTime = 0;
             _spaceshipPool = new List<GameObject>();
+            _animator = GetComponentInChildren<Animator>(true);
 
             for (var i = 0; i < FactoryAttributes.PollSize; i++)
             {
@@ -61,7 +63,10 @@ namespace Hackathon
         {
             if (collision.gameObject.CompareTag("Plane"))
             {
-                transform.rotation = Quaternion.Euler(Vector3.zero);
+                var eulerRotation = transform.eulerAngles;
+                eulerRotation.x = 0;
+                eulerRotation.z = 0;
+                transform.rotation = Quaternion.Euler(eulerRotation);
                 _canSpawn = true;
                 _interactable.gameObject.SetActive(false);
                 _inverseInteractable.gameObject.SetActive(false);
