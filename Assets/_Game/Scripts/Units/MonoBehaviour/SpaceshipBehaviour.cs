@@ -27,8 +27,8 @@ namespace Hackathon
         {
             get
             {
-                if (attributes is SpaceshipAttributes)
-                    return (SpaceshipAttributes)attributes;
+                if (Attributes is SpaceshipAttributes)
+                    return (SpaceshipAttributes)Attributes;
                 else
                     return ScriptableObject.CreateInstance<SpaceshipAttributes>();
             }

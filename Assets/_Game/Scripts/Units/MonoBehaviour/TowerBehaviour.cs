@@ -24,8 +24,8 @@ namespace Hackathon.Commands
         {
             get
             {
-                if (attributes is ArmedUnitAttributes)
-                    return (ArmedUnitAttributes)attributes;
+                if (Attributes is ArmedUnitAttributes)
+                    return (ArmedUnitAttributes)Attributes;
                 else
                     return ScriptableObject.CreateInstance<ArmedUnitAttributes>();
             }
