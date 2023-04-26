@@ -19,7 +19,7 @@ public class PanelButton : MonoBehaviour
         _camera = Camera.main;
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void ButtonPressed()
     {
         Debug.Log("Button Touched");
         if (_creatorPanel.player.TryPay((int)_prefab.Attributes.PriceValue))
