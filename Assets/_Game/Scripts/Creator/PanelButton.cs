@@ -24,7 +24,8 @@ public class PanelButton : MonoBehaviour
         Debug.Log("Button Touched");
         if (_creatorPanel.player.TryPay((int)_prefab.Attributes.PriceValue))
         {
-            Instantiate(_prefab.gameObject, _camera.transform.TransformPoint(_cameraOffset), Quaternion.identity);
+            var unit = Instantiate(_prefab.gameObject, _camera.transform.TransformPoint(_cameraOffset), Quaternion.identity);
+            unit.GetComponent<UnitBehaviour>().ownerPlayer = _creatorPanel.player;
         }
     }
 }

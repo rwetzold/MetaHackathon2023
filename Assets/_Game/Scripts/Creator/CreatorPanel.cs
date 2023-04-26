@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -16,16 +14,9 @@ namespace Hackathon
         [HideInInspector]
         public PlayerBehaviour player;
 
-        // Start is called before the first frame update
-        void Start()
+        public void UpdateResourceText(int newValue)
         {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
+            _resourcesText.text = newValue.ToString();
         }
     }
 
