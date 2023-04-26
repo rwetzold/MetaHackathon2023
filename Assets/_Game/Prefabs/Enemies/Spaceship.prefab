@@ -49,6 +49,10 @@ MonoBehaviour:
   ownerPlayer: {fileID: 0}
   _attributes: {fileID: 11400000, guid: 1f0eae9d25226ad4b94a8cb5a7a6a842, type: 2}
   _target: {fileID: 0}
+  _damagePhase01: {fileID: 2298531919240862090}
+  _damagePhase02: {fileID: 5493675189214238218}
+  _damagePhase03: {fileID: 5493413988679612903}
+  _damageDeath: {fileID: 5494028571831188684}
   _factory: {fileID: 0}
 --- !u!195 &-460654227519140666
 NavMeshAgent:
@@ -254,9 +258,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f868146b650e4c488b07747d3332db4, type: 3}
+--- !u!1 &2298531919240862090 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 883668292, guid: 5f868146b650e4c488b07747d3332db4,
+    type: 3}
+  m_PrefabInstance: {fileID: 2298531918373989582}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5492832216459896020 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6042831615166367770, guid: 5f868146b650e4c488b07747d3332db4,
+    type: 3}
+  m_PrefabInstance: {fileID: 2298531918373989582}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5493413988679612903 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6042283072168973609, guid: 5f868146b650e4c488b07747d3332db4,
+    type: 3}
+  m_PrefabInstance: {fileID: 2298531918373989582}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5493675189214238218 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6042549632920844996, guid: 5f868146b650e4c488b07747d3332db4,
+    type: 3}
+  m_PrefabInstance: {fileID: 2298531918373989582}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5494028571831188684 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6041776239407796226, guid: 5f868146b650e4c488b07747d3332db4,
     type: 3}
   m_PrefabInstance: {fileID: 2298531918373989582}
   m_PrefabAsset: {fileID: 0}

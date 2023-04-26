@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,6 +11,17 @@ namespace Hackathon
         private NavMeshAgent _navMeshAgent;
         private int _currentHealth = 0;
         public int currentHealth => _currentHealth;
+        [SerializeField]
+        public GameObject _damagePhase01;
+        [SerializeField]
+        public GameObject _damagePhase02;
+
+        [SerializeField]
+        public GameObject _damagePhase03;
+
+        [SerializeField]
+        public GameObject _damageDeath;
+
 
         public SpaceshipAttributes spaceshipAttributes
         {
@@ -72,18 +84,68 @@ namespace Hackathon
         public bool ApplyDamage(int damage)
         {
             _currentHealth -= damage;
-            if (_currentHealth <= 0)
+            if (_currentHealth <= spaceshipAttributes.HealthValue/4*3)
             {
-                KillIt();
-                return true;
+                if (_currentHealth <= spaceshipAttributes.HealthValue / 4 * 2)
+                {
+                    if (_currentHealth <= spaceshipAttributes.HealthValue / 4)
+                    {
+                        if (_currentHealth <= 0)
+                        {
+                            _damagePhase01.SetActive(false);
+                            _damagePhase02.SetActive(false);
+                            _damagePhase03.SetActive(false);
+                            _damageDeath.SetActive(true);
+                            KillIt();
+                            return true;
+                        }
+                        else
+                        {
+                            _damagePhase01.SetActive(false);
+                            _damagePhase02.SetActive(false);
+                            _damagePhase03.SetActive(true);
+                            _damageDeath.SetActive(false);
+                        }
+                    }
+                    else
+                    {
+                        _damagePhase01.SetActive(false);
+                        _damagePhase02.SetActive(true);
+                        _damagePhase03.SetActive(false);
+                        _damageDeath.SetActive(false);
+                    }
+                }
+                else
+                {
+                    _damagePhase01.SetActive(true);
+                    _damagePhase02.SetActive(false);
+                    _damagePhase03.SetActive(false);
+                    _damageDeath.SetActive(false);
+                }
+
+            }
+            else
+            {
+
             }
             return false;
         }
 
         public void KillIt()
         {
+            StartCoroutine(KillSlow());
+        }
+
+        IEnumerator KillSlow()
+        {
+            yield return new WaitForSeconds(1);
+            _damagePhase01.SetActive(false);
+            _damagePhase02.SetActive(false);
+            _damagePhase03.SetActive(false);
+            _damageDeath.SetActive(false);
             gameObject.SetActive(false);
         }
+
 
         void OnCollisionEnter(Collision collision)
         {
