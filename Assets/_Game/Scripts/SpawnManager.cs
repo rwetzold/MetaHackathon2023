@@ -27,6 +27,8 @@ namespace Hackathon
                 GameObject go = Instantiate(rule.prefab);
                 go.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
                 NavMeshAgent agent = go.GetComponentInChildren<NavMeshAgent>();
+                SpaceshipBehaviour spaceship = go.GetComponentInChildren<SpaceshipBehaviour>();
+                spaceship.ownerPlayer = gameObject;
                 agent.SetDestination(targetPoint.position);
 
                 yield return new WaitForSeconds(rule.delay);

@@ -4,15 +4,33 @@ using UnityEngine;
 
 public class TowerBehaviour : UnitBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+
+    private AimTarget _aimTarget = null;
+    private float _lastShot = 0f;
+
+    public ArmedUnitAttributes armedAttributes { get 
+        { if (attributes is ArmedUnitAttributes) 
+                return (ArmedUnitAttributes)attributes; 
+            else 
+                return ScriptableObject.CreateInstance<ArmedUnitAttributes>(); 
+        } 
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        _aimTarget = new AimTarget(this);
+        _lastShot = Time.time;
     }
+
+    private void Update()
+    {
+        _aimTarget.Execute();
+
+        if (_aimTarget.nextTarget != null && Time.time-_lastShot > armedAttributes.FireRageValue)
+        {
+            new AttacCommand(this, _aimTarget.nextTarget).Execute();
+            _lastShot = Time.time;
+        }
+    }
+
 }

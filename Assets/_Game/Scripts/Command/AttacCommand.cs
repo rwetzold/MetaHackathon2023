@@ -16,6 +16,7 @@ public class AttacCommand : ICommand
     }
     public void Execute()
     {
+        _target.ApplyDamage(_attacer.armedAttributes.DamageValue);
     }
 
 }

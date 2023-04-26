@@ -13,7 +13,6 @@ namespace Hackathon
 
         private void Start()
         {
-            defenceAttributes = new DefenceAttributes();
             _hits = new Collider[MAX_COLLIDERS];
         }
 
