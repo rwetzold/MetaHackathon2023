@@ -17,6 +17,9 @@ namespace Hackathon
         private List<GameObject> _spaceshipPool;
         private Animator _animator;
 
+        [SerializeField]
+        private bool _spwanOnAwake =false;
+
         public PlayerBehaviour target => _target;
         public FactoryAttributes FactoryAttributes => (FactoryAttributes)_attributes;
 
@@ -27,6 +30,7 @@ namespace Hackathon
             _spaceshipPool = new List<GameObject>();
             _animator = GetComponentInChildren<Animator>(true);
 
+            _canSpawn = _spwanOnAwake;
             for (var i = 0; i < FactoryAttributes.PollSize; i++)
             {
                 var spaceship = Instantiate(FactoryAttributes.PrefabUnit);
