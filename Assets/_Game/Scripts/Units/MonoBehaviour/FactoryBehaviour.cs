@@ -5,6 +5,11 @@ namespace Hackathon
 {
     public class FactoryBehaviour : UnitBehaviour
     {
+        [SerializeField]
+        private PlayerBehaviour _target;
+        public PlayerBehaviour target => _target;
+
+
         private float _spawnTime;
         public FactoryAttributes FactoryAttributes => (FactoryAttributes)_attributes;
         private List<GameObject> _spaceshipPool;

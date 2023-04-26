@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _priceValue: 1
   _damage: 1
-  _range: 3
+  _range: 2
   _fireRate: 1

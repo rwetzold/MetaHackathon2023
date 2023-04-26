@@ -18,5 +18,5 @@ MonoBehaviour:
   _fireRate: 1
   _shield: 0
   _speed: 2
-  _health: 3
+  _health: 5
   _coinsGain: 3

@@ -5,7 +5,8 @@ namespace Hackathon
 {
     public class SpaceshipBehaviour : UnitBehaviour
     {
-        private GameObject _target;
+        [SerializeField]
+        private PlayerBehaviour _target;
         private NavMeshAgent _navMeshAgent;
         private int _currentHealth = 0;
         public int currentHealth => _currentHealth;
@@ -23,9 +24,14 @@ namespace Hackathon
 
         // Temp
         public FactoryBehaviour _factory;
+        public void SetTarget(PlayerBehaviour targetPlayer)
+        {
+            _target = targetPlayer;
+        }
 
         private void OnEnable()
         {
+           
             if (_navMeshAgent == null)
             {
                 _navMeshAgent = GetComponent<NavMeshAgent>();
@@ -34,9 +40,33 @@ namespace Hackathon
             if (_factory != null)
             {
                 _navMeshAgent.SetDestination(_factory.FactoryAttributes.TargetPosition);
+                _target = _factory.target;
             }
 
             _currentHealth = spaceshipAttributes.HealthValue;
+        
+        }
+
+        void Update()
+        {
+            if (_target != null)
+            {
+                _navMeshAgent.SetDestination(_target.transform.position);
+                Vector3 targetPos = _target.transform.position;
+                targetPos.y = 0;
+                Vector3 offset = targetPos - transform.position;
+                float dist = offset.sqrMagnitude;
+                if (dist<0.3f)
+                { 
+                    if (_target != null && _target != ownerPlayer)
+                    {
+                        Commands.HitPlayerCommand hitPlayer = new Commands.HitPlayerCommand(this, _target);
+                        hitPlayer.Execute();
+                    }
+                }
+
+            }
+
         }
 
         public bool ApplyDamage(int damage)
@@ -48,6 +78,15 @@ namespace Hackathon
                 return true;
             }
             return false;
+        }
+
+        public void Destroy()
+        {
+            Destroy(gameObject);
+        }
+
+        void OnCollisionEnter(Collision collision)
+        {
         }
     }
 }
