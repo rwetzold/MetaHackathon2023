@@ -26,5 +26,25 @@ namespace Hackathon
         {
             _gameState = GameState.InGame;
         }
+
+        public void CreateTowerCommand()
+        {
+            Debug.Log("Create Tower");
+        }
+        
+        public void ModifyTowerCommand()
+        {
+            Debug.Log("Modify Tower");
+        }
+        
+        public void DeleteTowerCommand()
+        {
+            Debug.Log("Delete Tower");
+        }
+        
+        public void CreateFactoryCommand()
+        {
+            Debug.Log("Create Factory");
+        }        
     }
 }
