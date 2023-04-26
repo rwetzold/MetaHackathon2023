@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using UnityEngine;
 
 namespace Hackathon
@@ -38,13 +39,13 @@ namespace Hackathon
             GameObject newFloor = Instantiate(wallPrefab, scene.floor.position, scene.floor.rotation);
             newFloor.transform.localScale = new Vector3(scene.floor.rect.width, scene.floor.rect.height, 0.07f);
             newFloor.transform.rotation = scene.floor.rotation * Quaternion.Euler(180, 0, 0);
-            newFloor.SetActive(sceneAlignmentApplied);
+            newFloor.SetActive(true);
             sceneObjects.Add(newFloor);
 
             GameObject newCeiling = Instantiate(wallPrefab, scene.ceiling.position, scene.ceiling.rotation);
             newCeiling.transform.localScale = new Vector3(scene.ceiling.rect.width, scene.ceiling.rect.height, 0.07f);
             newCeiling.transform.rotation = scene.ceiling.rotation * Quaternion.Euler(180, 0, 0);
-            newCeiling.SetActive(sceneAlignmentApplied);
+            newCeiling.SetActive(true);
             sceneObjects.Add(newCeiling);
 
             foreach (Plane wall in scene.walls)
@@ -52,17 +53,19 @@ namespace Hackathon
                 GameObject newWall = Instantiate(wallPrefab, wall.position, wall.rotation);
                 newWall.transform.localScale = new Vector3(wall.rect.width, wall.rect.height, 0.07f);
                 newWall.transform.rotation = wall.rotation * Quaternion.Euler(0, 180, 0);
-                newWall.SetActive(sceneAlignmentApplied);
+                newWall.SetActive(true);
                 sceneObjects.Add(newWall);
             }
 
             foreach (Obstacle obstacle in scene.obstacles)
             {
                 GameObject deskObject = PopulateScaledObstacle(obstacle, ObstacleType.Desk);
-                deskObject.SetActive(sceneAlignmentApplied);
+                deskObject.SetActive(true);
                 sceneObjects.Add(deskObject);
             }
 
+            GetComponent<NavMeshSurface>().BuildNavMesh();
+            
             StartCoroutine(PlayIntroPassthrough());
         }
 

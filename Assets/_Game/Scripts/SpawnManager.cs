@@ -7,7 +7,6 @@ namespace Hackathon
     public class SpawnManager : MonoBehaviour
     {
         [SerializeField] private Transform spawnPoint;
-        [SerializeField] private PlayerBehaviour targetPoint;
         [SerializeField] private SpawnRule[] spawnRules;
         [SerializeField] private PlayerBehaviour ownerPlayer;
 
@@ -30,10 +29,9 @@ namespace Hackathon
                 NavMeshAgent agent = go.GetComponentInChildren<NavMeshAgent>();
                 SpaceshipBehaviour spaceship = go.GetComponentInChildren<SpaceshipBehaviour>();
                 spaceship.ownerPlayer = ownerPlayer;
-                spaceship.SetTarget(targetPoint);
-                if (spaceship.ownerPlayer == null)
-                    Debug.Log("Player is null");
-                agent.SetDestination(targetPoint.transform.position);
+                spaceship.SetTarget(GameManager.Instance.remotePlayer);
+                if (spaceship.ownerPlayer == null) Debug.Log("Player is null");
+                agent.SetDestination(GameManager.Instance.remotePlayer.transform.position);
 
                 yield return new WaitForSeconds(rule.delay);
             } while (true);

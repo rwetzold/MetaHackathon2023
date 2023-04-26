@@ -16,6 +16,8 @@ namespace Hackathon
         public Transform leftHand;
         public Transform rightHand;
 
+        [Header("Runtime")] public PlayerBehaviour remotePlayer;
+
         [Header("Events")] public UnityEvent OnGameStart;
 
         private GameState _gameState;
