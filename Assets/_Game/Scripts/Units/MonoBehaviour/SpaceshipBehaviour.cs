@@ -9,28 +9,28 @@ namespace Hackathon
         private NavMeshAgent _navMeshAgent;
         private int _currentHealth = 0;
 
-		public OffenceAttributes offenceAttributes
-    {
-        get
+        public OffenceAttributes offenceAttributes
         {
-            if (attributes is OffenceAttributes)
-                return (OffenceAttributes)attributes;
-            else
-                return ScriptableObject.CreateInstance<OffenceAttributes>();
+            get
+            {
+                if (attributes is OffenceAttributes)
+                    return (OffenceAttributes)attributes;
+                else
+                    return ScriptableObject.CreateInstance<OffenceAttributes>();
+            }
         }
-    }
 
         // Temp
         public FactoryBehaviour _factory;
-        
-         private void OnEnable()
+
+        private void OnEnable()
         {
             if (_navMeshAgent == null)
             {
                 _navMeshAgent = GetComponent<NavMeshAgent>();
             }
 
-            if(_factory != null)
+            if (_factory != null)
             {
                 _navMeshAgent.SetDestination(_factory.FactoryAttributes.TargetPosition);
             }
@@ -38,11 +38,13 @@ namespace Hackathon
             _currentHealth = offenceAttributes.HealthValue;
         }
 
-    public void ApplyDamage(int damage)
-    {
-        _currentHealth -= damage;
-        if (_currentHealth <= 0)
-            Destroy(this.gameObject);
+        public void ApplyDamage(int damage)
+        {
+            _currentHealth -= damage;
+            if (_currentHealth <= 0)
+                Destroy(this.gameObject);
+        }
     }
 }
+
 
