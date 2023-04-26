@@ -59,7 +59,8 @@ namespace Hackathon
         private void InstantiateSpaceship()
         {
             _spaceshipPool[0].SetActive(true);
-            _spaceshipPool[0].transform.SetPositionAndRotation(transform.TransformPoint(FactoryAttributes.LocalSpawnPosition), transform.rotation);
+            _spaceshipPool[0].transform.position = transform.TransformPoint(FactoryAttributes.LocalSpawnPosition);
+            _spaceshipPool[0].transform.forward = -transform.forward;
             _spaceshipPool.ShiftList();
         }
 
