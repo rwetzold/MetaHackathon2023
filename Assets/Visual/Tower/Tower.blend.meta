@@ -1,29 +1,9 @@
 fileFormatVersion: 2
-guid: c760264153eee4f44bb876d6b45647e3
+guid: 2e11dbce5fb650c44acad73b567abc7d
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Concrete
-    second: {fileID: 2100000, guid: a694d41863cba2a4e856344d691403e3, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material
-    second: {fileID: 2100000, guid: e4ff541d45010284fb44c74772281216, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Metal
-    second: {fileID: 2100000, guid: bc3f5586ae643b54cb632fc26ba351a1, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Outline
-    second: {fileID: 2100000, guid: e27ab43b0f092d445941e7c1ea58d9bb, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
