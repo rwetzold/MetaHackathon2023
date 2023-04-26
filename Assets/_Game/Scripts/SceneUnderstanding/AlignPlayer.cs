@@ -69,7 +69,7 @@ namespace Hackathon
                 yield return null;
             }
 
-            var anchorTransform = anchor.transform;
+            Transform anchorTransform = anchor.transform;
 
             if (player)
             {
@@ -97,8 +97,7 @@ namespace Hackathon
                 StopCoroutine(_realignCoroutine);
             }
 
-            if (anchor)
-                _realignCoroutine = StartCoroutine(RealignRoutine(anchor));
+            if (anchor) _realignCoroutine = StartCoroutine(RealignRoutine(anchor));
         }
 
         private IEnumerator RealignRoutine(SharedAnchor anchor)
@@ -113,7 +112,7 @@ namespace Hackathon
                 yield return null;
             }
 
-            var anchorTransform = anchor.transform;
+            Transform anchorTransform = anchor.transform;
 
             if (player)
             {

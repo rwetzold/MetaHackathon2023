@@ -20,10 +20,10 @@ namespace Hackathon
                     : Instantiate(headPrefab, Vector3.zero, Quaternion.identity).transform;
                 right = rightPrefab == null
                     ? new GameObject("right").transform
-                    : Instantiate(headPrefab, Vector3.zero, Quaternion.identity).transform;
+                    : Instantiate(rightPrefab, Vector3.zero, Quaternion.identity).transform;
                 left = leftPrefab == null
                     ? new GameObject("left").transform
-                    : Instantiate(headPrefab, Vector3.zero, Quaternion.identity).transform;
+                    : Instantiate(leftPrefab, Vector3.zero, Quaternion.identity).transform;
                 head.SetParent(body);
                 right.SetParent(body);
                 left.SetParent(body);
