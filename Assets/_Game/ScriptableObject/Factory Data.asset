@@ -15,7 +15,7 @@ MonoBehaviour:
   _priceValue: 20
   _spawnRate: 2
   _pollSize: 10
-  _localSpawnPosition: {x: 0, y: 0, z: 0}
+  _localSpawnPosition: {x: 0, y: 0, z: 1}
   _prefabUnit: {fileID: 1926569121695587139, guid: b1cfdd31add80b048ba08e24342b34d0,
     type: 3}
   _targetPosition: {x: -5.395929, y: 1.263791, z: -1.439204}

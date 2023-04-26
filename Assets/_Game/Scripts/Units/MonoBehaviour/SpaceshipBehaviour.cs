@@ -39,7 +39,7 @@ namespace Hackathon
 
             if (_factory != null)
             {
-                _navMeshAgent.SetDestination(_factory.FactoryAttributes.TargetPosition);
+                _navMeshAgent.SetDestination(_factory.target.transform.position);
                 _target = _factory.target;
             }
 

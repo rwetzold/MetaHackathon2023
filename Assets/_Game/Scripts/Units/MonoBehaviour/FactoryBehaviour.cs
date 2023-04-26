@@ -1,3 +1,4 @@
+using Oculus.Interaction.HandGrab;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,12 +8,16 @@ namespace Hackathon
     {
         [SerializeField]
         private PlayerBehaviour _target;
-        public PlayerBehaviour target => _target;
 
+        [SerializeField]
+        private HandGrabInteractable _interactable, _inverseInteractable;
 
+        private bool _canSpawn = false;
         private float _spawnTime;
-        public FactoryAttributes FactoryAttributes => (FactoryAttributes)_attributes;
         private List<GameObject> _spaceshipPool;
+
+        public PlayerBehaviour target => _target;
+        public FactoryAttributes FactoryAttributes => (FactoryAttributes)_attributes;
 
         // Start is called before the first frame update
         void Start()
@@ -32,17 +37,17 @@ namespace Hackathon
         // Update is called once per frame
         void Update()
         {
-            if (_spaceshipPool[0].activeInHierarchy)
+            if (_spaceshipPool[0].activeInHierarchy || !_canSpawn)
             {
                 return;
             }
 
-            //_spawnTime += Time.deltaTime;
-            //if (_spawnTime >= FactoryAttributes.SpawnRate)
-            //{
-            //    InstantiateSpaceship();
-            //    _spawnTime = 0;
-            //}
+            _spawnTime += Time.deltaTime;
+            if (_spawnTime >= FactoryAttributes.SpawnRate)
+            {
+                InstantiateSpaceship();
+                _spawnTime = 0;
+            }
         }
 
         private void InstantiateSpaceship()
@@ -50,6 +55,17 @@ namespace Hackathon
             _spaceshipPool[0].SetActive(true);
             _spaceshipPool[0].transform.SetPositionAndRotation(transform.TransformPoint(FactoryAttributes.LocalSpawnPosition), transform.rotation);
             _spaceshipPool.ShiftList();
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.CompareTag("Plane"))
+            {
+                transform.rotation = Quaternion.Euler(Vector3.zero);
+                _canSpawn = true;
+                _interactable.gameObject.SetActive(false);
+                _inverseInteractable.gameObject.SetActive(false);
+            }
         }
     }
 
