@@ -121,7 +121,8 @@ namespace Hackathon
                 AddToUsernameList(player.NickName);
             }
 
-            PhotonNetwork.Instantiate("NetworkPlayer", Vector3.zero, Quaternion.identity);
+            GameObject go = PhotonNetwork.Instantiate("NetworkPlayer", Vector3.zero, Quaternion.identity);
+            GameManager.Instance.remotePlayer = go.GetComponent<PlayerBehaviour>();
 
             GameObject sceneCaptureController = GameObject.Find("SceneModel");
             if (sceneCaptureController)
@@ -400,7 +401,7 @@ namespace Hackathon
 
         private void RemoveFromUsernameList(string username)
         {
-            var isUnknownUserName = !_usernameList.Contains(username);
+            bool isUnknownUserName = !_usernameList.Contains(username);
 
             if (isUnknownUserName)
             {
@@ -412,11 +413,11 @@ namespace Hackathon
 
         public static string[] GetUsers()
         {
-            var userIdsProperty = (string)PhotonNetwork.CurrentRoom.CustomProperties[UserIdsKey];
+            string userIdsProperty = (string)PhotonNetwork.CurrentRoom.CustomProperties[UserIdsKey];
 
             Debug.Log("GetUsers: " + userIdsProperty);
 
-            var userIds = userIdsProperty.Split(',');
+            string[] userIds = userIdsProperty.Split(',');
             return userIds;
         }
     }
