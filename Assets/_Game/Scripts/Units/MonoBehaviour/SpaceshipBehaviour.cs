@@ -1,25 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class SpaceshipBehaviour : UnitBehaviour
+namespace Hackathon
 {
-    private GameObject _target;
-
-    // Start is called before the first frame update
-    void Start()
+    public class SpaceshipBehaviour : UnitBehaviour
     {
-        
-    }
+        private GameObject _target;
+        private NavMeshAgent _navMeshAgent;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+        // Temp
+        public FactoryBehaviour _factory;
 
-    public void ApplyDamage(int damage)
-    {
+        private void OnEnable()
+        {
+            if (_navMeshAgent == null)
+            {
+                _navMeshAgent = GetComponent<NavMeshAgent>();
+            }
 
+            if(_factory != null)
+            {
+                _navMeshAgent.SetDestination(_factory.FactoryAttributes.TargetPosition);
+            }
+        }
+
+        public void ApplyDamage(int damage)
+        {
+
+        }
     }
 }
+
