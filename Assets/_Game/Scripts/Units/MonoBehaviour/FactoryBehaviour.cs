@@ -6,7 +6,6 @@ namespace Hackathon
 {
     public class FactoryBehaviour : UnitBehaviour
     {
-        [SerializeField]
         private PlayerBehaviour _target;
 
         [SerializeField]
@@ -28,6 +27,7 @@ namespace Hackathon
         {
             _spawnTime = 0;
             _spaceshipPool = new List<GameObject>();
+            _target = GameManager.Instance.remotePlayer.GetComponent<PlayerBehaviour>();
             _animator = GetComponentInChildren<Animator>(true);
 
             _canSpawn = _spwanOnAwake;
