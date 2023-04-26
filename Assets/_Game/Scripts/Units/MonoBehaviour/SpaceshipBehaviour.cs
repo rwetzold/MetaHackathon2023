@@ -22,6 +22,8 @@ namespace Hackathon
         [SerializeField]
         public GameObject _damageDeath;
 
+        [SerializeField]
+        public GameObject _body;
 
         public SpaceshipAttributes spaceshipAttributes
         {
@@ -92,10 +94,6 @@ namespace Hackathon
                     {
                         if (_currentHealth <= 0)
                         {
-                            _damagePhase01.SetActive(false);
-                            _damagePhase02.SetActive(false);
-                            _damagePhase03.SetActive(false);
-                            _damageDeath.SetActive(true);
                             KillIt();
                             return true;
                         }
@@ -138,11 +136,17 @@ namespace Hackathon
 
         IEnumerator KillSlow()
         {
-            yield return new WaitForSeconds(1);
+            _damagePhase01.SetActive(false);
+            _damagePhase02.SetActive(false);
+            _damagePhase03.SetActive(false);
+            _damageDeath.SetActive(true);
+            _body.SetActive(false);
+            yield return new WaitForSeconds(0.5f);
             _damagePhase01.SetActive(false);
             _damagePhase02.SetActive(false);
             _damagePhase03.SetActive(false);
             _damageDeath.SetActive(false);
+            _body.SetActive(true);
             gameObject.SetActive(false);
         }
 
