@@ -5,8 +5,10 @@ namespace Hackathon.Commands
 {
     public class TowerBehaviour : UnitBehaviour
     {
+        [SerializeField]
+        private PlayerBehaviour testPlayer;
 
-        private AimTarget _aimTarget = null;
+        private AimTargetCommand _aimTarget = null;
         private float _lastShot = 0f;
 
         public ArmedUnitAttributes armedAttributes
@@ -22,12 +24,14 @@ namespace Hackathon.Commands
 
         private void Start()
         {
-            _aimTarget = new AimTarget(this);
+            ownerPlayer = testPlayer;
             _lastShot = Time.time;
         }
 
         private void Update()
         {
+            if (_aimTarget == null)
+                _aimTarget = new AimTargetCommand(this);
             _aimTarget.Execute();
 
             if (_aimTarget.nextTarget != null && Time.time - _lastShot > armedAttributes.FireRageValue)

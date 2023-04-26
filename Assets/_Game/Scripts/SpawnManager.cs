@@ -9,6 +9,7 @@ namespace Hackathon
         [SerializeField] private Transform spawnPoint;
         [SerializeField] private Transform targetPoint;
         [SerializeField] private SpawnRule[] spawnRules;
+        [SerializeField] private PlayerBehaviour ownerPlayer;
 
         private void Start()
         {
@@ -28,7 +29,9 @@ namespace Hackathon
                 go.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
                 NavMeshAgent agent = go.GetComponentInChildren<NavMeshAgent>();
                 SpaceshipBehaviour spaceship = go.GetComponentInChildren<SpaceshipBehaviour>();
-                spaceship.ownerPlayer = gameObject;
+                spaceship.ownerPlayer = ownerPlayer;
+                if (spaceship.ownerPlayer == null)
+                    Debug.Log("Player is null");
                 agent.SetDestination(targetPoint.position);
 
                 yield return new WaitForSeconds(rule.delay);

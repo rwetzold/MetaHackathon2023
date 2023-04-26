@@ -7,7 +7,7 @@ namespace Hackathon
         private const int MAX_COLLIDERS = 10;
         private const int ENEMY_LAYER = 6;
 
-        [SerializeField] private DefenceAttributes defenceAttributes;
+        [SerializeField] private TowerAttributes defenceAttributes;
 
         private Collider[] _hits;
 

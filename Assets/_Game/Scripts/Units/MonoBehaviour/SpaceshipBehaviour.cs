@@ -8,15 +8,16 @@ namespace Hackathon
         private GameObject _target;
         private NavMeshAgent _navMeshAgent;
         private int _currentHealth = 0;
+        public int currentHealth => _currentHealth;
 
-        public OffenceAttributes offenceAttributes
+        public SpaceshipAttributes spaceshipAttributes
         {
             get
             {
-                if (attributes is OffenceAttributes)
-                    return (OffenceAttributes)attributes;
+                if (attributes is SpaceshipAttributes)
+                    return (SpaceshipAttributes)attributes;
                 else
-                    return ScriptableObject.CreateInstance<OffenceAttributes>();
+                    return ScriptableObject.CreateInstance<SpaceshipAttributes>();
             }
         }
 
@@ -35,14 +36,18 @@ namespace Hackathon
                 _navMeshAgent.SetDestination(_factory.FactoryAttributes.TargetPosition);
             }
 
-            _currentHealth = offenceAttributes.HealthValue;
+            _currentHealth = spaceshipAttributes.HealthValue;
         }
 
-        public void ApplyDamage(int damage)
+        public bool ApplyDamage(int damage)
         {
             _currentHealth -= damage;
             if (_currentHealth <= 0)
+            {
                 Destroy(this.gameObject);
+                return true;
+            }
+            return false;
         }
     }
 }

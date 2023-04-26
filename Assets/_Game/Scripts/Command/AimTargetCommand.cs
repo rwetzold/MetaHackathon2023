@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Hackathon.Commands
 {
 
-    public class AimTarget : ICommand
+    public class AimTargetCommand : ICommand
     {
         private const int MAX_COLLIDERS = 10;
         private const int ENEMY_LAYER = 6;
@@ -20,9 +20,9 @@ namespace Hackathon.Commands
 
         private Collider[] _hits;
 
-        private GameObject _ownerPlayer;
+        private PlayerBehaviour _ownerPlayer;
 
-        public AimTarget(TowerBehaviour attacer)
+        public AimTargetCommand(TowerBehaviour attacer)
         {
             _attacer = attacer;
             _ownerPlayer = attacer.ownerPlayer;
