@@ -211,11 +211,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2183103226877995343}
-  - component: {fileID: 3734769914629390063}
   - component: {fileID: 4353788077465891965}
   - component: {fileID: 3409632044710871851}
   - component: {fileID: 937017764212033003}
-  - component: {fileID: 1796980306685624082}
+  - component: {fileID: 2142909563}
   m_Layer: 0
   m_Name: EMP Tower
   m_TagString: Untagged
@@ -242,21 +241,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3734769914629390063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3699362709997084991}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1517ab95150da364ba5c8043d73919d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ownerPlayer: {fileID: 0}
-  _attributes: {fileID: 11400000, guid: eb0de0f6601d7624194b8c5c46df032e, type: 2}
-  testPlayer: {fileID: 0}
 --- !u!54 &4353788077465891965
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -374,7 +358,7 @@ MonoBehaviour:
   _whenCancel:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1796980306685624082
+--- !u!114 &2142909563
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -388,6 +372,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ownerPlayer: {fileID: 0}
   _attributes: {fileID: 11400000, guid: eb0de0f6601d7624194b8c5c46df032e, type: 2}
+  _cannonRotator: {fileID: 6740605593955123183}
+  _turret: {fileID: 9114853157808749478}
+  _muzzleFlashes: {fileID: 1900795197528132469}
   testPlayer: {fileID: 0}
 --- !u!1 &5088639044925883595
 GameObject:
@@ -842,8 +829,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7309897588233503950, guid: f1016cfc0bb0a5e458be1b3bf3debd36,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f1016cfc0bb0a5e458be1b3bf3debd36, type: 3}
+--- !u!1 &1900795197528132469 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7309897588233503950, guid: f1016cfc0bb0a5e458be1b3bf3debd36,
+    type: 3}
+  m_PrefabInstance: {fileID: 9156101758459203515}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6740605593955123183 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2493431902547931220, guid: f1016cfc0bb0a5e458be1b3bf3debd36,
+    type: 3}
+  m_PrefabInstance: {fileID: 9156101758459203515}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6890348263112511085 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2345932529531830742, guid: f1016cfc0bb0a5e458be1b3bf3debd36,
@@ -869,3 +873,9 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.55, z: 0}
+--- !u!4 &9114853157808749478 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 103429608254469149, guid: f1016cfc0bb0a5e458be1b3bf3debd36,
+    type: 3}
+  m_PrefabInstance: {fileID: 9156101758459203515}
+  m_PrefabAsset: {fileID: 0}
