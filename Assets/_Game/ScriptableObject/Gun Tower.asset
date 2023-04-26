@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84cd2ab38b26bde46979220dfcb4f31a, type: 3}
   m_Name: Gun Tower
   m_EditorClassIdentifier: 
+  _priceValue: 1
   _damage: 1
-  _range: 10
+  _range: 3
   _fireRate: 1

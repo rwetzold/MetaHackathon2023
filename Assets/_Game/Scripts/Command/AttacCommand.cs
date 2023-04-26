@@ -1,3 +1,7 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
 namespace Hackathon.Commands
 {
     public class AttacCommand : ICommand
@@ -14,8 +18,11 @@ namespace Hackathon.Commands
         }
         public void Execute()
         {
+            if (_target.ApplyDamage(_attacer.armedAttributes.DamageValue))
+            {
+                _attacer.ownerPlayer.AddCurreny(_target.spaceshipAttributes.coinsGain);
+            }
         }
 
     }
 }
-

@@ -43,6 +43,10 @@ namespace Hackathon
             OVRManager.SceneCaptureComplete += OnSceneCaptureComplete;
             OVRManager.SpaceQueryComplete += OnSpaceQueryCompleted;
             OVRManager.SpaceSetComponentStatusComplete += OnSpaceSetComponentStatusComplete;
+            
+            _walls = new List<Plane>();
+            _obstacles = new List<Obstacle>();
+            _scene = new Scene();
         }
 
         private void OnDestroy()
@@ -104,7 +108,7 @@ namespace Hackathon
         /// <summary>
         /// Create a query for the RoomLayout
         /// </summary>
-        private void LoadRoomLayout()
+        public void LoadRoomLayout()
         {
             var spatialEntityFilterInfoComponents = new OVRPlugin.SpaceFilterInfoComponents
             {

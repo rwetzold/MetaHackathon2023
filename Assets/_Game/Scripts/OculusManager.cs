@@ -20,7 +20,6 @@ namespace Hackathon
 
         private void OnOculusPlatformInitialized(Message<Oculus.Platform.Models.PlatformInitialize> message)
         {
-            InitDone?.Invoke();
             if (message.IsError)
             {
                 Debug.LogError("Failed to initialize Oculus Platform SDK: " + message.GetError());
@@ -28,6 +27,7 @@ namespace Hackathon
             }
 
             Debug.Log("Oculus Platform SDK initialized successfully");
+            InitDone?.Invoke();
 
             Entitlements.IsUserEntitledToApplication().OnComplete(msg =>
             {
