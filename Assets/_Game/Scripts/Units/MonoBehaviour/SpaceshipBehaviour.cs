@@ -99,15 +99,15 @@ namespace Hackathon
                         }
                         else
                         {
-                            _damagePhase01.SetActive(false);
-                            _damagePhase02.SetActive(false);
+                            _damagePhase01.SetActive(true);
+                            _damagePhase02.SetActive(true);
                             _damagePhase03.SetActive(true);
                             _damageDeath.SetActive(false);
                         }
                     }
                     else
                     {
-                        _damagePhase01.SetActive(false);
+                        _damagePhase01.SetActive(true);
                         _damagePhase02.SetActive(true);
                         _damagePhase03.SetActive(false);
                         _damageDeath.SetActive(false);
@@ -136,9 +136,9 @@ namespace Hackathon
 
         IEnumerator KillSlow()
         {
-            _damagePhase01.SetActive(false);
-            _damagePhase02.SetActive(false);
-            _damagePhase03.SetActive(false);
+            _damagePhase01.SetActive(true);
+            _damagePhase02.SetActive(true);
+            _damagePhase03.SetActive(true);
             _damageDeath.SetActive(true);
             _body.SetActive(false);
             yield return new WaitForSeconds(0.5f);
