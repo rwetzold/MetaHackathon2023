@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ExitGames.Client.Photon;
+using Meta.WitAi.TTS.Utilities;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
@@ -28,6 +29,8 @@ namespace Hackathon
 
         public event Action<NetworkState> OnNetworkState;
         public UnityEvent OnPlayersReady;
+
+        public TTSSpeaker tts;
 
         public static NetworkManager Instance;
 
@@ -152,6 +155,7 @@ namespace Hackathon
             Debug.Log("Photon::OnPlayerEnteredRoom: new player joined room: " + newPlayer.NickName);
 
             AddToUsernameList(newPlayer.NickName);
+            tts.Speak(newPlayer.NickName + " joined");
 
             if (SampleController.Instance.automaticCoLocation)
             {
