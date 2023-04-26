@@ -155,7 +155,7 @@ Transform:
   - {fileID: 1637941104}
   - {fileID: 888615721}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &541559021
 GameObject:
@@ -253,6 +253,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ownerPlayer: {fileID: 541559021}
   _attributes: {fileID: 11400000, guid: b7474020ce19dfb40910df4d0a30d4d9, type: 2}
+  _cannonRotator: {fileID: 0}
+  _turret: {fileID: 0}
   testPlayer: {fileID: 541559023}
 --- !u!1 &616364219
 GameObject:
@@ -284,7 +286,7 @@ Transform:
   m_Children:
   - {fileID: 1445400302}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &686754793
 GameObject:
@@ -494,7 +496,7 @@ Transform:
   - {fileID: 541559022}
   - {fileID: 686754794}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1082252910
 GameObject:
@@ -589,7 +591,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!114 &1082252913
 MonoBehaviour:
@@ -874,6 +876,80 @@ MonoBehaviour:
   _snapDistance: 0
   _voxelSize: 0.01
   _calculateNormals: 0
+--- !u!1001 &1650496045
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2183103226877995343, guid: df75944869e3d484893b51b90c8398ed,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2183103226877995343, guid: df75944869e3d484893b51b90c8398ed,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.7462799
+      objectReference: {fileID: 0}
+    - target: {fileID: 2183103226877995343, guid: df75944869e3d484893b51b90c8398ed,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.9293824
+      objectReference: {fileID: 0}
+    - target: {fileID: 2183103226877995343, guid: df75944869e3d484893b51b90c8398ed,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.41253152
+      objectReference: {fileID: 0}
+    - target: {fileID: 2183103226877995343, guid: df75944869e3d484893b51b90c8398ed,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2183103226877995343, guid: df75944869e3d484893b51b90c8398ed,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2183103226877995343, guid: df75944869e3d484893b51b90c8398ed,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2183103226877995343, guid: df75944869e3d484893b51b90c8398ed,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2183103226877995343, guid: df75944869e3d484893b51b90c8398ed,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2183103226877995343, guid: df75944869e3d484893b51b90c8398ed,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2183103226877995343, guid: df75944869e3d484893b51b90c8398ed,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3699362709997084991, guid: df75944869e3d484893b51b90c8398ed,
+        type: 3}
+      propertyPath: m_Name
+      value: EMP Tower
+      objectReference: {fileID: 0}
+    - target: {fileID: 3734769914629390063, guid: df75944869e3d484893b51b90c8398ed,
+        type: 3}
+      propertyPath: testPlayer
+      value: 
+      objectReference: {fileID: 541559023}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: df75944869e3d484893b51b90c8398ed, type: 3}
 --- !u!1 &1766318663
 GameObject:
   m_ObjectHideFlags: 0
