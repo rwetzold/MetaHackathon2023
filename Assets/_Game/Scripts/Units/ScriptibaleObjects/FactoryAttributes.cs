@@ -10,7 +10,7 @@ public class FactoryAttributes : UnitAttributes
     private int _pollSize;
 
     [SerializeField]
-    private int _maxPollSize;
+    private Vector3 _localSpawnPosition;
 
     [SerializeField]
     private GameObject _prefabUnit;
@@ -21,7 +21,7 @@ public class FactoryAttributes : UnitAttributes
 
     public float SpawnRate => _spawnRate;
     public int PollSize => _pollSize;
-    public int MaxPollSize => _maxPollSize;
+    public Vector3 LocalSpawnPosition => _localSpawnPosition;
     public GameObject PrefabUnit => _prefabUnit;
     public Vector3 TargetPosition => _targetPosition;
 }

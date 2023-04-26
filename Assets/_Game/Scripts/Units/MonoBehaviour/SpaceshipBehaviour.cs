@@ -1,13 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class SpaceshipBehaviour : UnitBehaviour
+namespace Hackathon
 {
-    private GameObject _target;
-    private int _currentHealth = 0;
+    public class SpaceshipBehaviour : UnitBehaviour
+    {
+        private GameObject _target;
+        private NavMeshAgent _navMeshAgent;
+        private int _currentHealth = 0;
 
-    public OffenceAttributes offenceAttributes
+		public OffenceAttributes offenceAttributes
     {
         get
         {
@@ -18,17 +20,23 @@ public class SpaceshipBehaviour : UnitBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        _currentHealth = offenceAttributes.HealthValue;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        // Temp
+        public FactoryBehaviour _factory;
         
-    }
+         private void OnEnable()
+        {
+            if (_navMeshAgent == null)
+            {
+                _navMeshAgent = GetComponent<NavMeshAgent>();
+            }
+
+            if(_factory != null)
+            {
+                _navMeshAgent.SetDestination(_factory.FactoryAttributes.TargetPosition);
+            }
+
+            _currentHealth = offenceAttributes.HealthValue;
+        }
 
     public void ApplyDamage(int damage)
     {
@@ -37,3 +45,4 @@ public class SpaceshipBehaviour : UnitBehaviour
             Destroy(this.gameObject);
     }
 }
+
