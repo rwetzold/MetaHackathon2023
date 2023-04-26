@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e71bee55f1fadd4a82a02a2e00359ee, type: 3}
   m_Name: Factory Data
   m_EditorClassIdentifier: 
-  _priceValue: 20
+  _priceValue: 40
   _spawnRate: 2
   _pollSize: 10
   _localSpawnPosition: {x: 0, y: 0, z: 0}

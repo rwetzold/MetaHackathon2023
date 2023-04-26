@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8b9201902aed064abe85bf67f0d21ae, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
-  _startCurrency: 20
+  _startCurrency: 200
   _health: 100

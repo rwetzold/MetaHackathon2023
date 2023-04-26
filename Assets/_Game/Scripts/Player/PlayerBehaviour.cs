@@ -1,3 +1,4 @@
+using Hackathon;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,10 @@ public class PlayerBehaviour : MonoBehaviour
 {
     [SerializeField]
     private PlayerAttributes _playerScriptable;
+
+    [SerializeField]
+    private CreatorPanel _creatorPanel;
+
     public PlayerAttributes playerScriptable => _playerScriptable;
 
     private int _currentCurrency = 0;
@@ -18,12 +23,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         _currentCurrency = _playerScriptable.StartCurrency;
         _currentHealth = _playerScriptable.Health;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        _creatorPanel.player = this;
     }
 
     public bool ApplyDamage(int damage)
