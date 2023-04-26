@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace Hackathon
@@ -6,6 +7,7 @@ namespace Hackathon
     {
         public GameObject aiPrefab;
         public Transform aiSpawnPoint;
+        public float joinDelay = 4f;
         public bool createObstacles;
         public int obstacles = 5;
         public Vector2 obstacleWidth;
@@ -14,8 +16,10 @@ namespace Hackathon
 
         private BoxCollider _volume;
 
-        private void Start()
+        private IEnumerator Start()
         {
+            yield return new WaitForSeconds(joinDelay);
+            
             _volume = GetComponent<BoxCollider>();
 
             if (createObstacles) CreateObstacles();
@@ -24,7 +28,7 @@ namespace Hackathon
             go.name = "AI Player";
             go.transform.SetPositionAndRotation(aiSpawnPoint.position, aiSpawnPoint.rotation);
 
-            GameManager.Instance.remotePlayer = go.transform;
+            GameManager.Instance.remotePlayer = go.GetComponent<PlayerBehaviour>();
             NetworkManager.Instance.SendSessionStart();
         }
 

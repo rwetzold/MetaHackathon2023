@@ -6,6 +6,7 @@ using System.Text;
 using ExitGames.Client.Photon;
 using UnityEngine;
 using Photon.Pun;
+using Unity.AI.Navigation;
 
 namespace Hackathon
 {
@@ -484,6 +485,7 @@ namespace Hackathon
                         [RoomDataKey] = serializedData
                     };
 
+                    Debug.LogError("Send Room Data");
                     PhotonNetwork.CurrentRoom.SetCustomProperties(roomProps);
                 }
             }
@@ -500,6 +502,12 @@ namespace Hackathon
             {
                 worldGenerationController.ShowSceneObjects();
             }
+        }
+
+        [ContextMenu("Update Navmesh")]
+        public void UpdateNavmesh()
+        {
+            FindObjectOfType<NavMeshSurface>().BuildNavMesh();
         }
     }
 }
