@@ -11,8 +11,6 @@ namespace Hackathon
             GameOver
         }
 
-        [SerializeField] private NetworkManager networkManager;
-
         [Header("Static references")] public Transform playerHead;
         public Transform leftHand;
         public Transform rightHand;
@@ -22,17 +20,31 @@ namespace Hackathon
         private void Start()
         {
             _gameState = GameState.Lobby;
-            networkManager.OnPlayersReady += OnPlayersReady;
         }
 
-        private void OnPlayersReady()
-        {
-            StartGame();
-        }
-
-        private void StartGame()
+        public void StartGame()
         {
             _gameState = GameState.InGame;
         }
+
+        public void CreateTowerCommand()
+        {
+            Debug.Log("Create Tower");
+        }
+        
+        public void ModifyTowerCommand()
+        {
+            Debug.Log("Modify Tower");
+        }
+        
+        public void DeleteTowerCommand()
+        {
+            Debug.Log("Delete Tower");
+        }
+        
+        public void CreateFactoryCommand()
+        {
+            Debug.Log("Create Factory");
+        }        
     }
 }

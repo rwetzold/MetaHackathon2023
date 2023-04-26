@@ -27,8 +27,7 @@ namespace Hackathon
 {
     public class SharedAnchorLoader : MonoBehaviour
     {
-
-        enum AnchorQueryMode
+        private enum AnchorQueryMode
         {
             CLOUD, // query to load anchors from the cloud
             LOCAL, // query all local anchors available
@@ -55,10 +54,6 @@ namespace Hackathon
             }
         }
 
-        private void OnEnable()
-        {
-        }
-
         private void OnDisable()
         {
             OVRManager.SpaceQueryComplete -= OnSpaceQueryComplete;
@@ -76,7 +71,8 @@ namespace Hackathon
                 return;
             }
 
-            var didSuccessfullyRetrieveResults = OVRPlugin.RetrieveSpaceQueryResults(requestId, out var queryResults);
+            bool didSuccessfullyRetrieveResults =
+                OVRPlugin.RetrieveSpaceQueryResults(requestId, out OVRPlugin.SpaceQueryResult[] queryResults);
             if (!didSuccessfullyRetrieveResults)
             {
                 SampleController.Instance.Log("RetrieveSpaceQueryResults: failed to query requestId: " + requestId +
@@ -92,22 +88,22 @@ namespace Hackathon
                 return;
             }
 
-            foreach (var queryResult in queryResults)
+            foreach (OVRPlugin.SpaceQueryResult queryResult in queryResults)
             {
                 SampleController.Instance.Log("OnSpaceQueryComplete: query [" + queryMode + "] found uuid: " +
                                               queryResult.uuid);
 
-                var spatialAnchor = Instantiate(SampleController.Instance.anchorPrefab);
+                OVRSpatialAnchor spatialAnchor = Instantiate(SampleController.Instance.anchorPrefab);
                 spatialAnchor.InitializeFromExisting(queryResult.space, queryResult.uuid);
 
-                var anchor = spatialAnchor.GetComponent<SharedAnchor>();
+                SharedAnchor anchor = spatialAnchor.GetComponent<SharedAnchor>();
                 if (anchor != null && queryMode == AnchorQueryMode.CLOUD)
                 {
                     //Disable the share icon since this anchor has been shared with me
                     anchor.DisableShareIcon();
                 }
 
-                var cachedAnchor = spatialAnchor.GetComponent<CachedSharedAnchor>();
+                CachedSharedAnchor cachedAnchor = spatialAnchor.GetComponent<CachedSharedAnchor>();
                 if (cachedAnchor != null)
                 {
                     cachedAnchor.IsSavedLocally = queryMode != AnchorQueryMode.CLOUD;
@@ -116,7 +112,7 @@ namespace Hackathon
                     {
                         // we have loaded a previously shared anchor from local device, next:
 
-                        // (1) the anchor is sent immediately to pariticipants
+                        // (1) the anchor is sent immediately to participants
                         // who can query it locally if they have it cached.
                         // this enables ultra fast colocation as no anchor data need to be shared through cloud.
                         cachedAnchor.IsSavedLocally = true;
@@ -154,7 +150,7 @@ namespace Hackathon
                 // It is best practice to always save shared anchor to local device and always
                 // first attempt to load them from local device to optimize latency.
                 Debug.Log(nameof(RetryLoadingAnchors));
-                var uuids = new HashSet<Guid>(_anchorsToRetryLoading);
+                HashSet<Guid> uuids = new HashSet<Guid>(_anchorsToRetryLoading);
                 _anchorsToRetryLoading.Clear();
                 LoadCloudAnchorsFromRemote(new HashSet<Guid>(uuids));
             }
@@ -176,7 +172,7 @@ namespace Hackathon
 
             SampleController.Instance.Log(nameof(LoadLocalAnchors));
 
-            var queryInfo = new OVRPlugin.SpaceQueryInfo()
+            OVRPlugin.SpaceQueryInfo queryInfo = new()
             {
                 QueryType = OVRPlugin.SpaceQueryType.Action,
                 MaxQuerySpaces = 100,
@@ -186,7 +182,7 @@ namespace Hackathon
                 FilterType = OVRPlugin.SpaceQueryFilterType.None,
             };
 
-            var didSuccessfullyQuerySpaces = OVRPlugin.QuerySpaces(queryInfo, out var requestId);
+            bool didSuccessfullyQuerySpaces = OVRPlugin.QuerySpaces(queryInfo, out ulong requestId);
 
             if (didSuccessfullyQuerySpaces)
             {
@@ -217,8 +213,8 @@ namespace Hackathon
             HashSet<Guid> uuids = new HashSet<Guid>();
             uuids.Add(new Guid(uuid));
 
-            var uuidInfo = new OVRPlugin.SpaceFilterInfoIds { NumIds = uuids.Count, Ids = uuids.ToArray() };
-            var queryInfo = new OVRPlugin.SpaceQueryInfo()
+            OVRPlugin.SpaceFilterInfoIds uuidInfo = new OVRPlugin.SpaceFilterInfoIds { NumIds = uuids.Count, Ids = uuids.ToArray() };
+            OVRPlugin.SpaceQueryInfo queryInfo = new OVRPlugin.SpaceQueryInfo()
             {
                 QueryType = OVRPlugin.SpaceQueryType.Action,
                 MaxQuerySpaces = 100,
@@ -229,7 +225,7 @@ namespace Hackathon
                 IdInfo = uuidInfo
             };
 
-            var didSuccessfullyQuerySpaces = OVRPlugin.QuerySpaces(queryInfo, out var requestId);
+            bool didSuccessfullyQuerySpaces = OVRPlugin.QuerySpaces(queryInfo, out var requestId);
 
             if (didSuccessfullyQuerySpaces)
             {
@@ -282,8 +278,8 @@ namespace Hackathon
             // Start by querying the anchors on local device, if not found, then query on cloud.
             SampleController.Instance.Log(nameof(LoadLocalAnchorsFromRemote));
 
-            var uuidInfo = new OVRPlugin.SpaceFilterInfoIds { NumIds = uuids.Count, Ids = uuids.ToArray() };
-            var queryInfo = new OVRPlugin.SpaceQueryInfo()
+            OVRPlugin.SpaceFilterInfoIds uuidInfo = new OVRPlugin.SpaceFilterInfoIds { NumIds = uuids.Count, Ids = uuids.ToArray() };
+            OVRPlugin.SpaceQueryInfo queryInfo = new OVRPlugin.SpaceQueryInfo()
             {
                 QueryType = OVRPlugin.SpaceQueryType.Action,
                 MaxQuerySpaces = 100,
@@ -294,7 +290,7 @@ namespace Hackathon
                 IdInfo = uuidInfo
             };
 
-            var didSuccessfullyQuerySpaces = OVRPlugin.QuerySpaces(queryInfo, out var requestId);
+            bool didSuccessfullyQuerySpaces = OVRPlugin.QuerySpaces(queryInfo, out var requestId);
 
             if (didSuccessfullyQuerySpaces)
             {
@@ -314,9 +310,9 @@ namespace Hackathon
             // Query cloud anchors received from remote participant
             SampleController.Instance.Log(nameof(LoadCloudAnchorsFromRemote));
 
-            var uuidInfo = new OVRPlugin.SpaceFilterInfoIds { NumIds = uuids.Count, Ids = uuids.ToArray() };
+            OVRPlugin.SpaceFilterInfoIds uuidInfo = new OVRPlugin.SpaceFilterInfoIds { NumIds = uuids.Count, Ids = uuids.ToArray() };
 
-            var queryInfo = new OVRPlugin.SpaceQueryInfo()
+            OVRPlugin.SpaceQueryInfo queryInfo = new OVRPlugin.SpaceQueryInfo()
             {
                 QueryType = OVRPlugin.SpaceQueryType.Action,
                 MaxQuerySpaces = 100,
@@ -327,7 +323,7 @@ namespace Hackathon
                 IdInfo = uuidInfo
             };
 
-            var didSuccessfullyQuerySpaces = OVRPlugin.QuerySpaces(queryInfo, out var requestId);
+            bool didSuccessfullyQuerySpaces = OVRPlugin.QuerySpaces(queryInfo, out ulong requestId);
 
             if (didSuccessfullyQuerySpaces)
             {

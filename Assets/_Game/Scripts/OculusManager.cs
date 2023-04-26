@@ -34,12 +34,8 @@ namespace Hackathon
                 if (msg.IsError)
                 {
                     Debug.LogError("You are not entitled to use this app: " + msg.GetError().Message);
-                    // return;
+                    return;
                 }
-
-                // launchType = ApplicationLifecycle.GetLaunchDetails().LaunchType;
-                // GroupPresence.SetJoinIntentReceivedNotificationCallback(OnJoinIntentReceived);
-                // GroupPresence.SetInvitationsSentNotificationCallback(OnInvitationsSent);
 
                 Users.GetLoggedInUser().OnComplete(OnLoggedInUser);
             });
