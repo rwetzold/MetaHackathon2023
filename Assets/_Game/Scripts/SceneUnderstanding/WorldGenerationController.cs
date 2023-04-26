@@ -12,12 +12,12 @@ namespace Hackathon
 
         List<GameObject> sceneObjects = new List<GameObject>();
 
-        bool sceneAlignmentApplied = false;
+        bool sceneAlignmentApplied;
 
         public Transform FindDeskTransform(Scene scene)
         {
             GameObject deskObject = null;
-            foreach (var obstacle in scene.obstacles)
+            foreach (Obstacle obstacle in scene.obstacles)
             {
                 if (obstacle.type == ObstacleType.Desk)
                     deskObject = PopulateScaledObstacle(obstacle, ObstacleType.Desk);
@@ -30,43 +30,35 @@ namespace Hackathon
         {
             Debug.Log("Generating World...");
             Debug.Log("Walls: " + scene.walls.Length);
-
-            if (scene.floor != null)
-                Debug.Log("Floor: YES");
-            else
-                Debug.Log("Floor: NO");
-
             Debug.Log("Obstacles: " + scene.obstacles.Length);
 
-            foreach (GameObject obj in sceneObjects)
-                Destroy(obj);
+            foreach (GameObject obj in sceneObjects) Destroy(obj);
             sceneObjects.Clear();
 
-            GameObject newFloor = GameObject.Instantiate(wallPrefab, scene.floor.position, scene.floor.rotation);
+            GameObject newFloor = Instantiate(wallPrefab, scene.floor.position, scene.floor.rotation);
             newFloor.transform.localScale = new Vector3(scene.floor.rect.width, scene.floor.rect.height, 0.07f);
             newFloor.transform.rotation = scene.floor.rotation * Quaternion.Euler(180, 0, 0);
             newFloor.SetActive(sceneAlignmentApplied);
             sceneObjects.Add(newFloor);
 
-            GameObject newCeiling = GameObject.Instantiate(wallPrefab, scene.ceiling.position, scene.ceiling.rotation);
+            GameObject newCeiling = Instantiate(wallPrefab, scene.ceiling.position, scene.ceiling.rotation);
             newCeiling.transform.localScale = new Vector3(scene.ceiling.rect.width, scene.ceiling.rect.height, 0.07f);
             newCeiling.transform.rotation = scene.ceiling.rotation * Quaternion.Euler(180, 0, 0);
             newCeiling.SetActive(sceneAlignmentApplied);
             sceneObjects.Add(newCeiling);
 
-            foreach (var wall in scene.walls)
+            foreach (Plane wall in scene.walls)
             {
-                GameObject newWall = GameObject.Instantiate(wallPrefab, wall.position, wall.rotation);
+                GameObject newWall = Instantiate(wallPrefab, wall.position, wall.rotation);
                 newWall.transform.localScale = new Vector3(wall.rect.width, wall.rect.height, 0.07f);
                 newWall.transform.rotation = wall.rotation * Quaternion.Euler(0, 180, 0);
                 newWall.SetActive(sceneAlignmentApplied);
                 sceneObjects.Add(newWall);
             }
 
-            GameObject deskObject = null;
-            foreach (var obstacle in scene.obstacles)
+            foreach (Obstacle obstacle in scene.obstacles)
             {
-                deskObject = PopulateScaledObstacle(obstacle, ObstacleType.Desk);
+                GameObject deskObject = PopulateScaledObstacle(obstacle, ObstacleType.Desk);
                 deskObject.SetActive(sceneAlignmentApplied);
                 sceneObjects.Add(deskObject);
             }
@@ -113,7 +105,7 @@ namespace Hackathon
             Vector3 deskPos = obstacle.position;
             deskPos.y += obstacleScale.y;
 
-            GameObject obstacleDeskGameObject = Object.Instantiate(obstaclePrefab, deskPos, obstacleRotation);
+            GameObject obstacleDeskGameObject = Instantiate(obstaclePrefab, deskPos, obstacleRotation);
             obstacleDeskGameObject.transform.localScale = obstacleScale;
             return obstacleDeskGameObject;
         }
@@ -128,7 +120,7 @@ namespace Hackathon
             sceneAlignmentApplied = true;
         }
 
-        IEnumerator PlayIntroPassthrough()
+        private IEnumerator PlayIntroPassthrough()
         {
             // fade in edges
             float timer = 0.0f;

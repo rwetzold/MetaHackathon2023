@@ -5,6 +5,7 @@ using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Hackathon
 {
@@ -26,7 +27,7 @@ namespace Hackathon
         }
 
         public event Action<NetworkState> OnNetworkState;
-        public event Action OnPlayersReady;
+        public UnityEvent OnPlayersReady;
 
         public static NetworkManager Instance;
 
@@ -115,14 +116,14 @@ namespace Hackathon
 
             AddUserToUserListState(_oculusUserId);
 
-            foreach (var player in PhotonNetwork.CurrentRoom.Players.Values)
+            foreach (Player player in PhotonNetwork.CurrentRoom.Players.Values)
             {
                 AddToUsernameList(player.NickName);
             }
 
             PhotonNetwork.Instantiate("NetworkPlayer", Vector3.zero, Quaternion.identity);
 
-            GameObject sceneCaptureController = GameObject.Find("SceneCaptureController");
+            GameObject sceneCaptureController = GameObject.Find("SceneModel");
             if (sceneCaptureController)
             {
                 if (PhotonNetwork.IsMasterClient)
@@ -161,6 +162,7 @@ namespace Hackathon
             }
         }
 
+        [ContextMenu("Send Anchor")]
         private void WaitToSendAnchor()
         {
             SampleController.Instance.colocationAnchor.OnShareButtonPressed();
@@ -191,13 +193,13 @@ namespace Hackathon
             Array.Resize(ref _sendUuidBuffer, 1 + UuidSize * (int)numUuids);
             _sendUuidBuffer[0] = PacketFormat;
 
-            var offset = 1;
-            for (var i = 0; i < numUuids; i++)
+            int offset = 1;
+            for (int i = 0; i < numUuids; i++)
             {
                 PackUuid(uuids[i], _sendUuidBuffer, ref offset);
             }
 
-            var rpcTarget = isBuffered ? RpcTarget.OthersBuffered : RpcTarget.Others;
+            RpcTarget rpcTarget = isBuffered ? RpcTarget.OthersBuffered : RpcTarget.Others;
             photonView.RPC(nameof(CheckForAnchorsShared), rpcTarget, _sendUuidBuffer);
         }
 
@@ -223,7 +225,7 @@ namespace Hackathon
                 return;
             }
 
-            var isInvalidPacketType = uuidsPacket[0] != PacketFormat;
+            bool isInvalidPacketType = uuidsPacket[0] != PacketFormat;
 
             if (isInvalidPacketType)
             {
@@ -232,8 +234,8 @@ namespace Hackathon
                 return;
             }
 
-            var numUuidsShared = (uuidsPacket.Length - 1) / UuidSize;
-            var isEmptyUuids = numUuidsShared == 0;
+            int numUuidsShared = (uuidsPacket.Length - 1) / UuidSize;
+            bool isEmptyUuids = numUuidsShared == 0;
 
             if (isEmptyUuids)
             {
@@ -243,26 +245,25 @@ namespace Hackathon
 
             Debug.Log(nameof(CheckForAnchorsShared) + " : we received a valid uuid packet");
 
-            var uuids = new HashSet<Guid>();
-            var offset = 1;
+            HashSet<Guid> uuids = new HashSet<Guid>();
+            int offset = 1;
 
-            for (var i = 0; i < numUuidsShared; i++)
+            for (int i = 0; i < numUuidsShared; i++)
             {
                 // We need to copy exactly 16 bytes here because Guid() expects a byte buffer sized to exactly 16 bytes
 
                 Buffer.BlockCopy(uuidsPacket, offset, _getUuidBuffer, 0, UuidSize);
                 offset += UuidSize;
 
-                var uuid = new Guid(_getUuidBuffer);
+                Guid uuid = new Guid(_getUuidBuffer);
 
                 Debug.Log(nameof(CheckForAnchorsShared) + " : unpacked uuid: " + uuid);
 
-                var shouldExit = uuid == _fakeUuid;
+                bool shouldExit = uuid == _fakeUuid;
 
                 if (shouldExit)
                 {
-                    Debug.Log(
-                        nameof(CheckForAnchorsShared) + " : received the fakeUuid/noop... exiting");
+                    Debug.Log(nameof(CheckForAnchorsShared) + " : received the fakeUuid/noop... exiting");
                     return;
                 }
 
@@ -273,7 +274,7 @@ namespace Hackathon
             SharedAnchorLoader.Instance.LoadAnchorsFromRemote(uuids);
         }
 
-        public override void OnRoomPropertiesUpdate(ExitGames.Client.Photon.Hashtable propertiesThatChanged)
+        public override void OnRoomPropertiesUpdate(Hashtable propertiesThatChanged)
         {
             if (propertiesThatChanged.ContainsKey(UserIdsKey))
             {
@@ -283,8 +284,7 @@ namespace Hackathon
                 }
             }
 
-            object data;
-            if (propertiesThatChanged.TryGetValue("roomData", out data))
+            if (propertiesThatChanged.TryGetValue("roomData", out object data))
             {
                 Debug.Log("Room data received from master client.");
                 DeserializeToScene((byte[])data);
@@ -318,7 +318,7 @@ namespace Hackathon
                 Debug.Log("deserializedScene is NULL");
             }
 
-            GameObject worldGenerationController = GameObject.Find("WorldGenerationController");
+            GameObject worldGenerationController = GameObject.Find("WorldGeneration");
             if (worldGenerationController)
                 worldGenerationController.GetComponent<WorldGenerationController>().GenerateWorld(deserializedScene);
         }

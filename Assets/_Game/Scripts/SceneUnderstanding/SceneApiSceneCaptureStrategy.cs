@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using ExitGames.Client.Photon;
 using UnityEngine;
 using Photon.Pun;
 
@@ -465,14 +466,12 @@ namespace Hackathon
 
             ShareRoomOnPhoton(scene);
 
-            if (_onComplete != null)
-                _onComplete(scene);
+            _onComplete?.Invoke(scene);
         }
 
         public void ShareRoomOnPhoton(Scene scene = null)
         {
-            if (scene == null)
-                scene = _scene;
+            if (scene == null) scene = _scene;
 
             if (PhotonNetwork.InRoom && PhotonNetwork.IsMasterClient)
             {
@@ -480,7 +479,7 @@ namespace Hackathon
 
                 if (serializedData != null)
                 {
-                    var roomProps = new ExitGames.Client.Photon.Hashtable
+                    Hashtable roomProps = new()
                     {
                         [RoomDataKey] = serializedData
                     };
@@ -492,7 +491,7 @@ namespace Hackathon
 
         public void AlignmentApplied()
         {
-            if (Photon.Pun.PhotonNetwork.IsMasterClient)
+            if (PhotonNetwork.IsMasterClient)
             {
                 BeginCaptureScene();
             }

@@ -18,9 +18,7 @@
  * limitations under the License.
  */
 
-using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using System.Collections.Generic;
 
 namespace Hackathon
@@ -80,7 +78,7 @@ namespace Hackathon
 
         private void Update()
         {
-            var shouldPlaceNewAnchor = _isPlacementMode && OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger);
+            bool shouldPlaceNewAnchor = _isPlacementMode && OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger);
 
             if (shouldPlaceNewAnchor)
             {

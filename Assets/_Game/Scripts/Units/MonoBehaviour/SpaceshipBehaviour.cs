@@ -51,9 +51,9 @@ namespace Hackathon
         {
             if (_target != null)
             {
-                _navMeshAgent.SetDestination(_target.transform.position);
                 Vector3 targetPos = _target.transform.position;
                 targetPos.y = 0;
+                _navMeshAgent.SetDestination(targetPos);
                 Vector3 offset = targetPos - transform.position;
                 float dist = offset.sqrMagnitude;
                 if (dist<0.3f)
