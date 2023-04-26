@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
@@ -9,6 +12,9 @@ namespace Hackathon
     {
         private const string ROOM_NAME = "towAR defense";
         private const int UuidSize = 16;
+        private const string UserIdsKey = "userids";
+        private const char Separator = ',';
+        private const byte PacketFormat = 0;
 
         public enum NetworkState
         {
@@ -22,10 +28,43 @@ namespace Hackathon
         public event Action<NetworkState> OnNetworkState;
         public event Action OnPlayersReady;
 
+        public static NetworkManager Instance;
+
+        // Reusable buffer to serialize the data into
+        private byte[] _sendUuidBuffer = new byte[1];
+        private byte[] _getUuidBuffer = new byte[UuidSize];
+        private byte[] _fakePacket = new byte[1];
+        private string _oculusUsername;
+        private ulong _oculusUserId;
+        private Guid _fakeUuid;
+        private readonly HashSet<string> _usernameList = new HashSet<string>();
+
+        private void Awake()
+        {
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else
+            {
+                Destroy(this);
+            }
+        }
+
         private void Start()
         {
             OnNetworkState?.Invoke(NetworkState.Connecting);
             PhotonNetwork.ConnectUsingSettings();
+
+            Array.Resize(ref _fakePacket, 1 + UuidSize);
+            _fakePacket[0] = PacketFormat;
+
+            int offset = 1;
+            byte[] fakeBytes = new byte[]
+                { 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff };
+
+            _fakeUuid = new Guid(fakeBytes);
+            PackUuid(_fakeUuid, _fakePacket, ref offset);
         }
 
         private void OnApplicationPause(bool pause)
@@ -73,6 +112,14 @@ namespace Hackathon
         public override void OnJoinedRoom()
         {
             Debug.Log("Photon::OnJoinedRoom: joined room: " + PhotonNetwork.CurrentRoom.Name);
+
+            AddUserToUserListState(_oculusUserId);
+
+            foreach (var player in PhotonNetwork.CurrentRoom.Players.Values)
+            {
+                AddToUsernameList(player.NickName);
+            }
+
             PhotonNetwork.Instantiate("NetworkPlayer", Vector3.zero, Quaternion.identity);
 
             GameObject sceneCaptureController = GameObject.Find("SceneCaptureController");
@@ -80,8 +127,7 @@ namespace Hackathon
             {
                 if (PhotonNetwork.IsMasterClient)
                 {
-                    // sceneCaptureController.GetComponent<SceneApiSceneCaptureStrategy>().InitSceneCapture();
-                    // sceneCaptureController.GetComponent<SceneApiSceneCaptureStrategy>().BeginCaptureScene();
+                    sceneCaptureController.GetComponent<SceneApiSceneCaptureStrategy>().LoadRoomLayout();
                 }
                 else
                 {
@@ -103,7 +149,29 @@ namespace Hackathon
         {
             Debug.Log("Photon::OnPlayerEnteredRoom: new player joined room: " + newPlayer.NickName);
 
-            // Invoke(nameof(WaitToSendAnchor), 1);
+            AddToUsernameList(newPlayer.NickName);
+
+            if (SampleController.Instance.automaticCoLocation)
+            {
+                Invoke(nameof(WaitToSendAnchor), 1);
+            }
+            else if (SampleController.Instance.cachedAnchorSample)
+            {
+                Invoke(nameof(WaitToReshareAnchor), 1);
+            }
+        }
+
+        private void WaitToSendAnchor()
+        {
+            SampleController.Instance.colocationAnchor.OnShareButtonPressed();
+        }
+
+        private void WaitToReshareAnchor()
+        {
+            if (SampleController.Instance.colocationCachedAnchor != null)
+            {
+                SampleController.Instance.colocationCachedAnchor.ReshareAnchor();
+            }
         }
 
         public override void OnPlayerLeftRoom(Player otherPlayer)
@@ -116,96 +184,95 @@ namespace Hackathon
             Debug.Log("Photon::OnCreatedRoom: created room: " + PhotonNetwork.CurrentRoom.Name);
         }
 
-        /*
         public void PublishAnchorUuids(Guid[] uuids, uint numUuids, bool isBuffered)
         {
-            SampleController.Instance.Log("PublishAnchorUuids: numUuids: " + numUuids);
-    
+            Debug.Log("PublishAnchorUuids: numUuids: " + numUuids);
+
             Array.Resize(ref _sendUuidBuffer, 1 + UuidSize * (int)numUuids);
             _sendUuidBuffer[0] = PacketFormat;
-    
+
             var offset = 1;
             for (var i = 0; i < numUuids; i++)
             {
                 PackUuid(uuids[i], _sendUuidBuffer, ref offset);
             }
-    
+
             var rpcTarget = isBuffered ? RpcTarget.OthersBuffered : RpcTarget.Others;
             photonView.RPC(nameof(CheckForAnchorsShared), rpcTarget, _sendUuidBuffer);
         }
-    
+
         private static void PackUuid(Guid uuid, byte[] buf, ref int offset)
         {
             Debug.Log("PackUuid: packing uuid: " + uuid);
-    
+
             Buffer.BlockCopy(uuid.ToByteArray(), 0, buf, offset, UuidSize);
             offset += 16;
         }
-    
+
         [PunRPC]
         private void CheckForAnchorsShared(byte[] uuidsPacket)
         {
             Debug.Log(nameof(CheckForAnchorsShared) + " : found a packet...");
-    
+
             bool isInvalidPacketSize = uuidsPacket.Length % UuidSize != 1;
-    
+
             if (isInvalidPacketSize)
             {
-                SampleController.Instance.Log(
+                Debug.Log(
                     $"{nameof(CheckForAnchorsShared)}: invalid packet size: {uuidsPacket.Length} should be 1+{UuidSize}*numUuidsShared");
                 return;
             }
-    
+
             var isInvalidPacketType = uuidsPacket[0] != PacketFormat;
-    
+
             if (isInvalidPacketType)
             {
-                SampleController.Instance.Log(nameof(CheckForAnchorsShared) + " : invalid packet type: " +
-                                              uuidsPacket.Length);
+                Debug.Log(nameof(CheckForAnchorsShared) + " : invalid packet type: " +
+                          uuidsPacket.Length);
                 return;
             }
-    
+
             var numUuidsShared = (uuidsPacket.Length - 1) / UuidSize;
             var isEmptyUuids = numUuidsShared == 0;
-    
+
             if (isEmptyUuids)
             {
-                SampleController.Instance.Log(nameof(CheckForAnchorsShared) + " : we received a no-op packet");
+                Debug.Log(nameof(CheckForAnchorsShared) + " : we received a no-op packet");
                 return;
             }
-    
-            SampleController.Instance.Log(nameof(CheckForAnchorsShared) + " : we received a valid uuid packet");
-    
+
+            Debug.Log(nameof(CheckForAnchorsShared) + " : we received a valid uuid packet");
+
             var uuids = new HashSet<Guid>();
             var offset = 1;
-    
+
             for (var i = 0; i < numUuidsShared; i++)
             {
                 // We need to copy exactly 16 bytes here because Guid() expects a byte buffer sized to exactly 16 bytes
-    
+
                 Buffer.BlockCopy(uuidsPacket, offset, _getUuidBuffer, 0, UuidSize);
                 offset += UuidSize;
-    
+
                 var uuid = new Guid(_getUuidBuffer);
-    
+
                 Debug.Log(nameof(CheckForAnchorsShared) + " : unpacked uuid: " + uuid);
-    
+
                 var shouldExit = uuid == _fakeUuid;
-    
+
                 if (shouldExit)
                 {
-                    SampleController.Instance.Log(
+                    Debug.Log(
                         nameof(CheckForAnchorsShared) + " : received the fakeUuid/noop... exiting");
                     return;
                 }
-    
+
                 uuids.Add(uuid);
             }
-    
+
             Debug.Log(nameof(CheckForAnchorsShared) + " : set of uuids shared: " + uuids.Count);
             SharedAnchorLoader.Instance.LoadAnchorsFromRemote(uuids);
         }
-    
+
         public override void OnRoomPropertiesUpdate(ExitGames.Client.Photon.Hashtable propertiesThatChanged)
         {
             if (propertiesThatChanged.ContainsKey(UserIdsKey))
@@ -215,15 +282,15 @@ namespace Hackathon
                     anchor.ReshareAnchor();
                 }
             }
-    
+
             object data;
             if (propertiesThatChanged.TryGetValue("roomData", out data))
             {
-                SampleController.Instance.Log("Room data received from master client.");
+                Debug.Log("Room data received from master client.");
                 DeserializeToScene((byte[])data);
             }
         }
-    */
+
         private void LoadRoomFromProperties()
         {
             if (PhotonNetwork.CurrentRoom == null)
@@ -267,6 +334,90 @@ namespace Hackathon
         public void SendSessionStart()
         {
             OnPlayersReady?.Invoke();
+        }
+
+        public static HashSet<ulong> GetUserList()
+        {
+            if (PhotonNetwork.CurrentRoom == null ||
+                !PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey(UserIdsKey))
+            {
+                return new HashSet<ulong>();
+            }
+
+            var userListAsString = (string)PhotonNetwork.CurrentRoom.CustomProperties[UserIdsKey];
+            var parsedList = userListAsString.Split(Separator).Select(ulong.Parse);
+
+            return new HashSet<ulong>(parsedList);
+        }
+
+        private void AddUserToUserListState(ulong userId)
+        {
+            var userList = GetUserList();
+            var isKnownUserId = userList.Contains(userId);
+
+            if (isKnownUserId)
+            {
+                return;
+            }
+
+            userList.Add(userId);
+            SaveUserList(userList);
+        }
+
+        public void RemoveUserFromUserListState(ulong userId)
+        {
+            HashSet<ulong> userList = GetUserList();
+            bool isUnknownUserId = !userList.Contains(userId);
+
+            if (isUnknownUserId)
+            {
+                return;
+            }
+
+            userList.Remove(userId);
+            SaveUserList(userList);
+        }
+
+        private static void SaveUserList(HashSet<ulong> userList)
+        {
+            string userListAsString = string.Join(Separator.ToString(), userList);
+            Hashtable setValue = new ExitGames.Client.Photon.Hashtable { { UserIdsKey, userListAsString } };
+
+            PhotonNetwork.CurrentRoom.SetCustomProperties(setValue);
+        }
+
+        private void AddToUsernameList(string username)
+        {
+            bool isKnownUserName = _usernameList.Contains(username);
+
+            if (isKnownUserName)
+            {
+                return;
+            }
+
+            _usernameList.Add(username);
+        }
+
+        private void RemoveFromUsernameList(string username)
+        {
+            var isUnknownUserName = !_usernameList.Contains(username);
+
+            if (isUnknownUserName)
+            {
+                return;
+            }
+
+            _usernameList.Remove(username);
+        }
+
+        public static string[] GetUsers()
+        {
+            var userIdsProperty = (string)PhotonNetwork.CurrentRoom.CustomProperties[UserIdsKey];
+
+            Debug.Log("GetUsers: " + userIdsProperty);
+
+            var userIds = userIdsProperty.Split(',');
+            return userIds;
         }
     }
 }
