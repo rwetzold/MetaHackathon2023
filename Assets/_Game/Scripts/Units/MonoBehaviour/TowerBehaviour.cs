@@ -14,9 +14,6 @@ namespace Hackathon.Commands
         [SerializeField]
         private GameObject _muzzleFlashes;
 
-        [SerializeField]
-        private PlayerBehaviour testPlayer;
-
         private AimTargetCommand _aimTarget = null;
         private float _lastShot = 0f;
         private float _muzzleFlashesTimer;
@@ -33,7 +30,6 @@ namespace Hackathon.Commands
 
         private void Start()
         {
-            ownerPlayer = testPlayer;
             _lastShot = Time.time;
         }
 

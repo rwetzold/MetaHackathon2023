@@ -2050,28 +2050,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8968098320273456727, guid: 4339be885155daf43b0ae2ea08166c45,
-        type: 3}
-      propertyPath: _prefab
-      value: 
-      objectReference: {fileID: 2170649138061048449, guid: cbef9cf8d6ad53a4fb7e7d33ced2e5be,
-        type: 3}
-    - target: {fileID: 8968098320273456727, guid: 4339be885155daf43b0ae2ea08166c45,
-        type: 3}
-      propertyPath: _cameraOffset.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8968098320273456728, guid: 4339be885155daf43b0ae2ea08166c45,
-        type: 3}
-      propertyPath: _prefab
-      value: 
-      objectReference: {fileID: 2142909563, guid: df75944869e3d484893b51b90c8398ed,
-        type: 3}
-    - target: {fileID: 8968098320273456728, guid: 4339be885155daf43b0ae2ea08166c45,
-        type: 3}
-      propertyPath: _cameraOffset.z
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8968098321034518677, guid: 4339be885155daf43b0ae2ea08166c45,
         type: 3}
       propertyPath: m_Name

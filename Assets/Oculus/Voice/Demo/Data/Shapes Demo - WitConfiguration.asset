@@ -39,6 +39,8 @@ MonoBehaviour:
     dictation: 
   isDemoOnly: 1
   useConduit: 1
-  _manifestLocalPath: ConduitManifest-dfed8eb1-de72-492e-ab2d-31380a4f945b.json
-  excludedAssemblies: []
+  _manifestLocalPath: ConduitManifest-63301a14-cdfe-465a-91c0-0d8db67feb7f.json
+  excludedAssemblies:
+  - Oculus.Voice.Demo, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  - Meta.WitAi.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   relaxedResolution: 0

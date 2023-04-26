@@ -1,6 +1,4 @@
 using Hackathon;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerBehaviour : MonoBehaviour
@@ -8,7 +6,6 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField]
     private PlayerAttributes _playerScriptable;
 
-    [SerializeField]
     private CreatorPanel _creatorPanel;
 
     public PlayerAttributes playerScriptable => _playerScriptable;
@@ -21,6 +18,7 @@ public class PlayerBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _creatorPanel = FindObjectOfType<CreatorPanel>();
         _currentCurrency = _playerScriptable.StartCurrency;
         _currentHealth = _playerScriptable.Health;
         _creatorPanel.player = this;
@@ -50,6 +48,7 @@ public class PlayerBehaviour : MonoBehaviour
             return false;
 
         _currentCurrency -= price;
+        _creatorPanel.UpdateResourceText(_currentCurrency);
         return true;
     }
 
