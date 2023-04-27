@@ -59,8 +59,8 @@ namespace Hackathon.Commands
 
                 if (_aimTarget.nextTarget != null)
                 {
-//                    LookAtX(_aimTarget.nextTarget.transform,_cannonRotator);
-//                    LookAtY(_aimTarget.nextTarget.transform, _turret);
+                    LookAtY(_aimTarget.nextTarget.transform, _turret);
+                    LookAtX(_aimTarget.nextTarget.transform, _cannonRotator);
 
                     if (Time.time - _lastShot > armedAttributes.FireRageValue)
                     {
@@ -75,20 +75,20 @@ namespace Hackathon.Commands
 
         void LookAtY(Transform target, Transform viewer)
         {
-            Vector3 lookPos = target.position - viewer.transform.position;
-            Quaternion lookRot = Quaternion.LookRotation(lookPos, Vector3.up);
-            float eulerY = lookRot.eulerAngles.y;
-            Quaternion rotation = Quaternion.Euler(0, eulerY, 0);
-            viewer.rotation = rotation;
+            float oldEulerX = viewer.eulerAngles.x;
+            float oldEulerZ = viewer.eulerAngles.z;
+
+            viewer.LookAt(target /*new Vector3(viewer.position.x, target.position.y, viewer.position.z)*/);
+            viewer.eulerAngles = new Vector3(oldEulerX, viewer.eulerAngles.y+180, oldEulerZ);
         }
 
         void LookAtX(Transform target, Transform viewer)
         {
-            Vector3 lookPos = target.position - viewer.transform.position;
-            Quaternion lookRot = Quaternion.LookRotation(lookPos, Vector3.up);
-            float eulerX = lookRot.eulerAngles.x;
-            Quaternion rotation = Quaternion.Euler(eulerX, 0, 0);
-            viewer.rotation = rotation;
+            float oldEulerY = viewer.eulerAngles.y;
+            float oldEulerZ = viewer.eulerAngles.z;
+
+            viewer.LookAt(target /*new Vector3(viewer.position.x, target.position.y, viewer.position.z)*/);
+            viewer.eulerAngles = new Vector3(viewer.eulerAngles.y + 180, oldEulerY, oldEulerZ);
         }
 
         private void OnCollisionEnter(Collision collision)
