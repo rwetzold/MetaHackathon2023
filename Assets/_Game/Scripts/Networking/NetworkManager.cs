@@ -341,6 +341,17 @@ namespace Hackathon
             OnPlayersReady?.Invoke();
         }
 
+        public void SendLocalPlayerLost()
+        {
+            photonView.RPC("GameWon", RpcTarget.Others);
+        }
+
+        [PunRPC]
+        public void GameWon()
+        {
+            GameManager.Instance.SetGameWon();
+        }
+
         public static HashSet<ulong> GetUserList()
         {
             if (PhotonNetwork.CurrentRoom == null ||

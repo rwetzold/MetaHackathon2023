@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using Meta.WitAi.TTS.Utilities;
 using Photon.Pun;
 using TMPro;
@@ -25,6 +26,9 @@ namespace Hackathon
         [Header("Runtime")] public PlayerBehaviour remotePlayer;
 
         [Header("Events")] public UnityEvent OnGameStart;
+        [Header("Events")] public UnityEvent OnGameOver;
+        [Header("Events")] public UnityEvent OnGameWon;
+        [Header("Events")] public UnityEvent OnGameLost;
 
         private GameState _gameState;
 
@@ -39,6 +43,29 @@ namespace Hackathon
         public void StartGame()
         {
             StartCoroutine(StartCountdown());
+        }
+
+        private void SetGameOver()
+        {
+            _gameState = GameState.GameOver;
+
+            FindObjectsByType<SpaceshipBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None).ToList()
+                .ForEach(ship => { ship.KillIt(); });
+
+            OnGameOver?.Invoke();
+        }
+
+        public void SetGameLost()
+        {
+            SetGameOver();
+            OnGameLost?.Invoke();
+            NetworkManager.Instance.SendLocalPlayerLost();
+        }
+
+        public void SetGameWon()
+        {
+            SetGameOver();
+            OnGameWon?.Invoke();
         }
 
         private IEnumerator StartCountdown()
