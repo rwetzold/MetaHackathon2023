@@ -18,6 +18,9 @@ namespace Hackathon.Commands
         [SerializeField]
         private GameObject _muzzleFlashes;
 
+        [SerializeField]
+        private Animator _animator;
+
         private bool _towerActiv = false;
 
         private AimTargetCommand _aimTarget = null;
@@ -92,6 +95,7 @@ namespace Hackathon.Commands
         {
             if (collision.gameObject.CompareTag("Plane"))
             {
+                _animator.SetBool("OpenHatch", true);
                 var eulerRotation = transform.eulerAngles;
                 eulerRotation.x = 0;
                 eulerRotation.z = 0;

@@ -379,6 +379,7 @@ MonoBehaviour:
   _cannonRotator: {fileID: 6740605593955123183}
   _turret: {fileID: 9114853157808749478}
   _muzzleFlashes: {fileID: 1900795197528132469}
+  _animator: {fileID: 6890348263608758538}
 --- !u!114 &8871331728184392400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -925,6 +926,12 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.55, z: 0}
+--- !u!95 &6890348263608758538 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2345932530297568945, guid: f1016cfc0bb0a5e458be1b3bf3debd36,
+    type: 3}
+  m_PrefabInstance: {fileID: 9156101758459203515}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &9114853157808749478 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 103429608254469149, guid: f1016cfc0bb0a5e458be1b3bf3debd36,
