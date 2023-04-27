@@ -397,6 +397,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _distance: 0.15
   _slerpScale: 2
+  _updateOnce: 0
 --- !u!114 &8968098320273456723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -576,7 +577,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f21797621270c6d4982748ecb1db64bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefab: {fileID: 2170649138061048449, guid: cbef9cf8d6ad53a4fb7e7d33ced2e5be, type: 3}
+  _prefab: 
+  _price: 0
   _cameraOffset: {x: 0, y: 0, z: 0.6}
 --- !u!1 &2364630345451724513 stripped
 GameObject:
@@ -596,7 +598,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f21797621270c6d4982748ecb1db64bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefab: {fileID: 2142909563, guid: df75944869e3d484893b51b90c8398ed, type: 3}
+  _prefab: 
+  _price: 0
   _cameraOffset: {x: 0, y: 0, z: 0.6}
 --- !u!4 &8968098320061048368 stripped
 Transform:
@@ -747,7 +750,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f21797621270c6d4982748ecb1db64bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefab: {fileID: 2142909563, guid: df75944869e3d484893b51b90c8398ed, type: 3}
+  _prefab: Tower
+  _price: 20
   _cameraOffset: {x: 0, y: 0, z: 0.6}
 --- !u!1001 &7813148615373757005
 PrefabInstance:
@@ -886,7 +890,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f21797621270c6d4982748ecb1db64bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefab: {fileID: 2170649138061048449, guid: cbef9cf8d6ad53a4fb7e7d33ced2e5be, type: 3}
+  _prefab: Factory
+  _price: 40
   _cameraOffset: {x: 0, y: 0, z: 0.6}
 --- !u!4 &305214769426585035 stripped
 Transform:

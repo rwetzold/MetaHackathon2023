@@ -1,5 +1,6 @@
 using Oculus.Interaction.HandGrab;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 namespace Hackathon
@@ -8,22 +9,20 @@ namespace Hackathon
     {
         private PlayerBehaviour _target;
 
-        [SerializeField]
-        private HandGrabInteractable _interactable, _inverseInteractable;
+        [SerializeField] private HandGrabInteractable _interactable, _inverseInteractable;
 
         private bool _canSpawn = false;
         private float _spawnTime;
         private List<GameObject> _spaceshipPool;
         private Animator _animator;
 
-        [SerializeField]
-        private bool _spwanOnAwake =false;
+        [SerializeField] private bool _spwanOnAwake = false;
 
         public PlayerBehaviour target => _target;
         public FactoryAttributes FactoryAttributes => (FactoryAttributes)_attributes;
 
         // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
             _spawnTime = 0;
             _spaceshipPool = new List<GameObject>();
@@ -33,7 +32,8 @@ namespace Hackathon
             _canSpawn = _spwanOnAwake;
             for (var i = 0; i < FactoryAttributes.PollSize; i++)
             {
-                var spaceship = Instantiate(FactoryAttributes.PrefabUnit);
+                var spaceship = PhotonNetwork.Instantiate(FactoryAttributes.PrefabUnit, transform.position,
+                    transform.rotation);
                 spaceship.GetComponent<SpaceshipBehaviour>()._factory = this;
                 spaceship.SetActive(false);
                 _spaceshipPool.Add(spaceship);
@@ -41,9 +41,9 @@ namespace Hackathon
         }
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
-            if (_spaceshipPool[0].activeInHierarchy || !_canSpawn)
+            if (_spaceshipPool.Count == 0 || _spaceshipPool[0].activeInHierarchy || !_canSpawn)
             {
                 return;
             }
@@ -78,5 +78,4 @@ namespace Hackathon
             }
         }
     }
-
 }

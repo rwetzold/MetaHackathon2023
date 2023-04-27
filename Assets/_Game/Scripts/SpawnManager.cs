@@ -1,4 +1,5 @@
 using System.Collections;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -28,8 +29,7 @@ namespace Hackathon
             {
                 if (createEnemies)
                 {
-                    GameObject go = Instantiate(rule.prefab);
-                    go.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
+                    GameObject go = PhotonNetwork.Instantiate(rule.prefab,spawnPoint.position, spawnPoint.rotation);
                     NavMeshAgent agent = go.GetComponentInChildren<NavMeshAgent>();
                     SpaceshipBehaviour spaceship = go.GetComponentInChildren<SpaceshipBehaviour>();
                     spaceship.ownerPlayer = ownerPlayer;
