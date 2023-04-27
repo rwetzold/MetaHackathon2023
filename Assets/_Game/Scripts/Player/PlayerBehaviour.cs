@@ -24,11 +24,13 @@ public class PlayerBehaviour : MonoBehaviour
         _currentCurrency = _playerScriptable.StartCurrency;
         _currentHealth = _playerScriptable.Health;
         _creatorPanel.player = this;
+        _creatorPanel.UpdatePlayerHealth(_currentHealth);
     }
 
     public bool ApplyDamage(int damage)
     {
         _currentHealth -= damage;
+        _creatorPanel.UpdatePlayerHealth(_currentHealth);
 
         if (_currentHealth < 10 && !_healthWarningDone)
         {

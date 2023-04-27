@@ -18,6 +18,11 @@ namespace Hackathon
         {
             _resourcesText.text = newValue.ToString();
         }
+
+        public void UpdatePlayerHealth(int health)
+        {
+            _lifeText.text = health.ToString();
+        }
     }
 
 }
