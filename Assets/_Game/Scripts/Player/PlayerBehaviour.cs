@@ -31,6 +31,7 @@ public class PlayerBehaviour : MonoBehaviour
         if (_currentHealth <= 0)
         {
             // Death
+            GameManager.Instance.SetGameLost();
             Debug.Log("Death");
             return true;
         }
