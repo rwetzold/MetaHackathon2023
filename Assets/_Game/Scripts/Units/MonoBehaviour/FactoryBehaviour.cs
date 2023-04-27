@@ -52,6 +52,7 @@ namespace Hackathon
             if (_spawnTime >= FactoryAttributes.SpawnRate)
             {
                 InstantiateSpaceship();
+                _animator.SetTrigger("OpenDoor");
                 _spawnTime = 0;
             }
         }
