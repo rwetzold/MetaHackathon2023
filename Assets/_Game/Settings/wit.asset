@@ -20,9 +20,9 @@ MonoBehaviour:
     isPrivate: 0
     createdAt: 2023-04-26T07:36:17-0700
     trainingStatus: 1
-    lastTrainDuration: 15
-    lastTrainedAt: 2023-04-26T07:42:09-0700
-    nextTrainAt: 2023-04-26T07:41:54-0700
+    lastTrainDuration: 46
+    lastTrainedAt: 2023-04-27T03:02:11-0700
+    nextTrainAt: 2023-04-27T03:01:25-0700
     intents:
     - id: 1167800697947716
       name: create_factory
@@ -33,8 +33,14 @@ MonoBehaviour:
     - id: 1295210224400537
       name: delete_tower
       entities: []
+    - id: 613005594090193
+      name: hide_panel
+      entities: []
     - id: 145903818279891
       name: modify_tower
+      entities: []
+    - id: 533454585654035
+      name: show_panel
       entities: []
     - id: 742598257544938
       name: special_attack
