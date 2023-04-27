@@ -915,6 +915,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 849813191, guid: 4339be885155daf43b0ae2ea08166c45, type: 3}
+      propertyPath: _updateOnce
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8968098321034518677, guid: 4339be885155daf43b0ae2ea08166c45,
         type: 3}
       propertyPath: m_Name
@@ -2129,6 +2133,15 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  OnGameOver:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGameWon:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGameLost:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!82 &1010122969
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2560,7 +2573,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1085367584
 Transform:
   m_ObjectHideFlags: 0
