@@ -59,8 +59,8 @@ namespace Hackathon.Commands
 
                 if (_aimTarget.nextTarget != null)
                 {
-                    LookAtX(_aimTarget.nextTarget.transform,_cannonRotator);
-                    LookAtY(_aimTarget.nextTarget.transform, _turret);
+//                    LookAtX(_aimTarget.nextTarget.transform,_cannonRotator);
+//                    LookAtY(_aimTarget.nextTarget.transform, _turret);
 
                     if (Time.time - _lastShot > armedAttributes.FireRageValue)
                     {
@@ -95,6 +95,7 @@ namespace Hackathon.Commands
         {
             if (collision.gameObject.CompareTag("Plane"))
             {
+                Debug.Log("TowerActiv");
                 _animator.SetBool("OpenHatch", true);
                 var eulerRotation = transform.eulerAngles;
                 eulerRotation.x = 0;
