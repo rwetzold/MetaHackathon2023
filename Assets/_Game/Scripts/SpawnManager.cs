@@ -6,6 +6,8 @@ namespace Hackathon
 {
     public class SpawnManager : MonoBehaviour
     {
+        public bool createEnemies;
+
         [SerializeField] private Transform spawnPoint;
         [SerializeField] private SpawnRule[] spawnRules;
         [SerializeField] private PlayerBehaviour ownerPlayer;
@@ -24,14 +26,17 @@ namespace Hackathon
 
             do
             {
-                GameObject go = Instantiate(rule.prefab);
-                go.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
-                NavMeshAgent agent = go.GetComponentInChildren<NavMeshAgent>();
-                SpaceshipBehaviour spaceship = go.GetComponentInChildren<SpaceshipBehaviour>();
-                spaceship.ownerPlayer = ownerPlayer;
-                spaceship.SetTarget(GameManager.Instance.remotePlayer);
-                if (spaceship.ownerPlayer == null) Debug.Log("Player is null");
-                agent.SetDestination(GameManager.Instance.remotePlayer.transform.position);
+                if (createEnemies)
+                {
+                    GameObject go = Instantiate(rule.prefab);
+                    go.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
+                    NavMeshAgent agent = go.GetComponentInChildren<NavMeshAgent>();
+                    SpaceshipBehaviour spaceship = go.GetComponentInChildren<SpaceshipBehaviour>();
+                    spaceship.ownerPlayer = ownerPlayer;
+                    spaceship.SetTarget(GameManager.Instance.remotePlayer);
+                    if (spaceship.ownerPlayer == null) Debug.Log("Player is null");
+                    agent.SetDestination(GameManager.Instance.remotePlayer.transform.position);
+                }
 
                 yield return new WaitForSeconds(rule.delay);
             } while (true);
