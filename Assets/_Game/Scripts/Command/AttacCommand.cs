@@ -20,7 +20,7 @@ namespace Hackathon.Commands
         {
             if (_target.ApplyDamage(_attacer.armedAttributes.DamageValue))
             {
-                _attacer.ownerPlayer.AddCurreny(_target.spaceshipAttributes.coinsGain);
+                _attacer.ownerPlayer.AddCurrency(_target.spaceshipAttributes.coinsGain);
             }
         }
 

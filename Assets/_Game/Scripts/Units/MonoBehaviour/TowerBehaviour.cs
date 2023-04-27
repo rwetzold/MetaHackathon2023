@@ -1,24 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Linq;
+using Oculus.Interaction.HandGrab;
 using UnityEngine;
+
 namespace Hackathon.Commands
 {
     public class TowerBehaviour : UnitBehaviour
     {
-        [SerializeField]
-        private Transform _cannonRotator;
+        [SerializeField] private HandGrabInteractable _interactable, _inverseInteractable;
 
-        [SerializeField]
-        private Transform _turret;
+        [SerializeField] private Transform _cannonRotator;
 
-        [SerializeField]
-        private GameObject _muzzleFlashes;
+        [SerializeField] private Transform _turret;
+
+        [SerializeField] private GameObject _muzzleFlashes;
+
+        [SerializeField] private GameObject[] _outlineGOs;
 
         private bool _towerActiv = false;
 
         private AimTargetCommand _aimTarget = null;
         private float _lastShot = 0f;
         private float _muzzleFlashesTimer;
+
         public ArmedUnitAttributes armedAttributes
         {
             get
@@ -33,6 +36,18 @@ namespace Hackathon.Commands
         public void SetTowerActiv()
         {
             _towerActiv = true;
+        }
+
+        [ContextMenu("Set Outlined")]
+        public void SetOutlined()
+        {
+            _outlineGOs.ToList().ForEach(go => go.SetActive(true));
+        }
+
+        [ContextMenu("Set Non Outlined")]
+        public void SetNonOutlined()
+        {
+            _outlineGOs.ToList().ForEach(go => go.SetActive(false));
         }
 
         private void Start()
@@ -54,7 +69,8 @@ namespace Hackathon.Commands
                 {
                     Vector3 oldRotation = _cannonRotator.eulerAngles;
                     _cannonRotator.LookAt(_aimTarget.nextTarget.transform);
-                    _cannonRotator.eulerAngles = new Vector3(_cannonRotator.eulerAngles.x, oldRotation.y, oldRotation.z);
+                    _cannonRotator.eulerAngles =
+                        new Vector3(_cannonRotator.eulerAngles.x, oldRotation.y, oldRotation.z);
 
                     oldRotation = _turret.eulerAngles;
                     _turret.LookAt(_aimTarget.nextTarget.transform);
@@ -71,5 +87,18 @@ namespace Hackathon.Commands
             }
         }
 
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.CompareTag("Plane"))
+            {
+                var eulerRotation = transform.eulerAngles;
+                eulerRotation.x = 0;
+                eulerRotation.z = 0;
+                transform.rotation = Quaternion.Euler(eulerRotation);
+                _towerActiv = true;
+                _interactable.gameObject.SetActive(false);
+                _inverseInteractable.gameObject.SetActive(false);
+            }
+        }
     }
 }

@@ -12,15 +12,24 @@ public class UIFollowCamera : MonoBehaviour
     [SerializeField]
     private float _slerpScale = 0.3f;
 
+    [SerializeField]
+    private bool _updateOnce = false;
+
+    private bool _updated;
+
     // Start is called before the first frame update
     void Start()
     {
+        _updated = false;
         _camera = Camera.main;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(_updateOnce && _updated) return;
+
+        _updated = true;
         var cameraPosition = _camera.transform.position;
         var cameraDirection = _camera.transform.forward;
 

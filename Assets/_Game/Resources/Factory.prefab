@@ -118,8 +118,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 622db80eec0bd344f920b1aa056ae8d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _relativeTo: {fileID: 2557527080587967632}
   _surface: {fileID: 0}
+  _relativeTo: {fileID: 2557527080587967632}
   _usesHandPose: 1
   _handPose:
     _handedness: 1
@@ -390,6 +390,8 @@ GameObject:
   - component: {fileID: 8586305519672152058}
   - component: {fileID: 648783726254509606}
   - component: {fileID: 2170649138061048449}
+  - component: {fileID: 8540953035298893127}
+  - component: {fileID: 3779707115734873064}
   m_Layer: 8
   m_Name: Factory
   m_TagString: Untagged
@@ -515,8 +517,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2170649138061048449}
-        m_TargetAssemblyTypeName: UnitBehaviour, Assembly-CSharp
+      - m_Target: {fileID: 1986462617121407211}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
         m_MethodName: Play
         m_Mode: 1
         m_Arguments:
@@ -547,10 +549,48 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ownerPlayer: {fileID: 0}
   _attributes: {fileID: 11400000, guid: 82387036583c5174d8eb168d8d80fdf9, type: 2}
-  _target: {fileID: 0}
   _interactable: {fileID: 2092452043285408570}
-  _inverseInteractable: {fileID: 0}
+  _inverseInteractable: {fileID: 8646258712267103658}
   _spwanOnAwake: 0
+--- !u!114 &8540953035298893127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5167320332085928907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 0
+--- !u!114 &3779707115734873064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5167320332085928907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 8540953035298893127}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &5996794956105340566
 GameObject:
   m_ObjectHideFlags: 0
@@ -595,8 +635,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 622db80eec0bd344f920b1aa056ae8d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _relativeTo: {fileID: 2557527080587967632}
   _surface: {fileID: 0}
+  _relativeTo: {fileID: 2557527080587967632}
   _usesHandPose: 1
   _handPose:
     _handedness: 0

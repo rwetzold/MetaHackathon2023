@@ -1,15 +1,14 @@
 using Hackathon;
+using Photon.Pun;
 using UnityEngine;
 
 public class PanelButton : MonoBehaviour
 {
     private CreatorPanel _creatorPanel;
 
-    [SerializeField]
-    private UnitBehaviour _prefab;
-
-    [SerializeField]
-    private Vector3 _cameraOffset;
+    [SerializeField] private string _prefab;
+    [SerializeField] private int _price;
+    [SerializeField] private Vector3 _cameraOffset;
 
     private Camera _camera;
 
@@ -19,12 +18,13 @@ public class PanelButton : MonoBehaviour
         _camera = Camera.main;
     }
 
+    [ContextMenu("Execute")]
     public void ButtonPressed()
     {
-        Debug.Log("Button Touched");
-        if (_creatorPanel.player.TryPay((int)_prefab.Attributes.PriceValue))
+        if (_creatorPanel.player.TryPay(_price))
         {
-            var unit = Instantiate(_prefab.gameObject, _camera.transform.TransformPoint(_cameraOffset), Quaternion.identity);
+            GameObject unit = PhotonNetwork.Instantiate(_prefab, _camera.transform.TransformPoint(_cameraOffset),
+                Quaternion.identity);
             unit.GetComponent<UnitBehaviour>().ownerPlayer = _creatorPanel.player;
         }
     }

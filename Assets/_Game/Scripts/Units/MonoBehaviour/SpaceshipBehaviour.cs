@@ -1,4 +1,5 @@
 using System.Collections;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -149,7 +150,6 @@ namespace Hackathon
             _body.SetActive(true);
             gameObject.SetActive(false);
         }
-
 
         void OnCollisionEnter(Collision collision)
         {

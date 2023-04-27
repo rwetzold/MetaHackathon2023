@@ -215,8 +215,10 @@ GameObject:
   - component: {fileID: 3409632044710871851}
   - component: {fileID: 937017764212033003}
   - component: {fileID: 2142909563}
+  - component: {fileID: 8871331728184392400}
+  - component: {fileID: 3157273960648593569}
   m_Layer: 0
-  m_Name: EMP Tower
+  m_Name: Tower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -372,10 +374,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ownerPlayer: {fileID: 0}
   _attributes: {fileID: 11400000, guid: eb0de0f6601d7624194b8c5c46df032e, type: 2}
+  _interactable: {fileID: 8217276042935105430}
+  _inverseInteractable: {fileID: 4921149533361334}
   _cannonRotator: {fileID: 6740605593955123183}
   _turret: {fileID: 9114853157808749478}
   _muzzleFlashes: {fileID: 1900795197528132469}
-  testPlayer: {fileID: 0}
+--- !u!114 &8871331728184392400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3699362709997084991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 0
+--- !u!114 &3157273960648593569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3699362709997084991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 8871331728184392400}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &5088639044925883595
 GameObject:
   m_ObjectHideFlags: 0
@@ -622,8 +664,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 622db80eec0bd344f920b1aa056ae8d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _relativeTo: {fileID: 2183103226877995343}
   _surface: {fileID: 0}
+  _relativeTo: {fileID: 2183103226877995343}
   _usesHandPose: 1
   _handPose:
     _handedness: 0
@@ -723,8 +765,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 622db80eec0bd344f920b1aa056ae8d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _relativeTo: {fileID: 2183103226877995343}
   _surface: {fileID: 0}
+  _relativeTo: {fileID: 2183103226877995343}
   _usesHandPose: 1
   _handPose:
     _handedness: 1
@@ -829,10 +871,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4130684976616637447, guid: f1016cfc0bb0a5e458be1b3bf3debd36,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7309897588233503950, guid: f1016cfc0bb0a5e458be1b3bf3debd36,
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199826102343374409, guid: f1016cfc0bb0a5e458be1b3bf3debd36,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f1016cfc0bb0a5e458be1b3bf3debd36, type: 3}

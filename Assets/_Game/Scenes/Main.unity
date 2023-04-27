@@ -698,10 +698,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e11efa3c73f6c74492846e0d7123183, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  createEnemies: 0
   spawnPoint: {fileID: 261521628}
   spawnRules:
-  - prefab: {fileID: 1926569121695587139, guid: b1cfdd31add80b048ba08e24342b34d0,
-      type: 3}
+  - prefab: 
     initialDelay: 0
     delay: 2
   ownerPlayer: {fileID: 0}
@@ -915,6 +915,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 849813191, guid: 4339be885155daf43b0ae2ea08166c45, type: 3}
+      propertyPath: _updateOnce
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8968098321034518677, guid: 4339be885155daf43b0ae2ea08166c45,
         type: 3}
       propertyPath: m_Name
@@ -2105,18 +2109,6 @@ MonoBehaviour:
   OnGameStart:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1010122969}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 261521627}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -2129,6 +2121,15 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  OnGameOver:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGameWon:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGameLost:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!82 &1010122969
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2560,7 +2561,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1085367584
 Transform:
   m_ObjectHideFlags: 0
