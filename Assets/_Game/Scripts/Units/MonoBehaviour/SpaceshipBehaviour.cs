@@ -71,7 +71,7 @@ namespace Hackathon
                 _navMeshAgent.SetDestination(targetPos);
                 Vector3 offset = targetPos - transform.position;
                 float dist = offset.sqrMagnitude;
-                if (dist<0.3f)
+                if (dist<1f)
                 { 
                     if (_target != null && _target != ownerPlayer)
                     {
