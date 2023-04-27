@@ -979,6 +979,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4339be885155daf43b0ae2ea08166c45, type: 3}
+--- !u!1 &470563769 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8968098321034518677, guid: 4339be885155daf43b0ae2ea08166c45,
+    type: 3}
+  m_PrefabInstance: {fileID: 470563768}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &567411704 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100004, guid: 126d619cf4daa52469682f85c1378b4a,
@@ -1570,7 +1576,7 @@ MonoBehaviour:
   onMultiValueEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1501554172}
+      - m_Target: {fileID: 470563769}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -2067,7 +2073,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66fdc1b14e80f4a4abbd151f02c95280, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomName: towAR defense2
+  roomName: towAR defense
   OnPlayersReady:
     m_PersistentCalls:
       m_Calls:
@@ -3319,7 +3325,7 @@ MonoBehaviour:
   onMultiValueEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1501554172}
+      - m_Target: {fileID: 470563769}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
