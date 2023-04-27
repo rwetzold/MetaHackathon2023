@@ -485,7 +485,6 @@ namespace Hackathon
                         [RoomDataKey] = serializedData
                     };
 
-                    Debug.LogError("Send Room Data");
                     PhotonNetwork.CurrentRoom.SetCustomProperties(roomProps);
                 }
             }

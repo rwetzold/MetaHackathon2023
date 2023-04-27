@@ -53,19 +53,25 @@ namespace Hackathon
                 .ForEach(ship => { ship.KillIt(); });
 
             OnGameOver?.Invoke();
+            countdown.gameObject.SetActive(true);
         }
 
+        [ContextMenu("Set game lost")]
         public void SetGameLost()
         {
             SetGameOver();
             OnGameLost?.Invoke();
             NetworkManager.Instance.SendLocalPlayerLost();
+
+            countdown.text = "You Lost";
         }
 
+        [ContextMenu("Set game won")]
         public void SetGameWon()
         {
             SetGameOver();
             OnGameWon?.Invoke();
+            countdown.text = "You won";
         }
 
         private IEnumerator StartCountdown()
@@ -102,6 +108,11 @@ namespace Hackathon
         public void CreateFactoryCommand()
         {
             Debug.Log("Create Factory");
+        }
+
+        public void Speak(string text)
+        {
+            tts.Speak(text);
         }
     }
 }
