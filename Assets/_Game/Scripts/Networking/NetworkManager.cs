@@ -1,12 +1,13 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using ExitGames.Client.Photon;
 using Meta.WitAi.TTS.Utilities;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.Events;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 namespace Hackathon
 {
@@ -126,14 +127,7 @@ namespace Hackathon
             }
 
             GameObject go = PhotonNetwork.Instantiate("NetworkPlayer", Vector3.zero, Quaternion.identity);
-            if (photonView.IsMine)
-            {
-                go.GetComponent<PlayerBehaviour>().isLocal = true;
-            }
-            else
-            {
-                GameManager.Instance.remotePlayer = go.GetComponent<PlayerBehaviour>();
-            }
+            go.GetComponent<PlayerBehaviour>().isLocal = true;
 
             GameObject sceneCaptureController = GameObject.Find("SceneModel");
             if (sceneCaptureController)
@@ -173,6 +167,14 @@ namespace Hackathon
             {
                 Invoke(nameof(WaitToReshareAnchor), 1);
             }
+
+            StartCoroutine(StartGameHack());
+        }
+
+        private IEnumerator StartGameHack()
+        {
+            yield return new WaitForSeconds(4f);
+            SendSessionStart();
         }
 
         [ContextMenu("Send Anchor")]

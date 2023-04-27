@@ -17,20 +17,23 @@ public class PlayerBehaviour : MonoBehaviour
 
     private bool _healthWarningDone;
 
-    // Start is called before the first frame update
     private void Start()
     {
-        _creatorPanel = FindObjectOfType<CreatorPanel>();
         _currentCurrency = _playerScriptable.StartCurrency;
         _currentHealth = _playerScriptable.Health;
-        _creatorPanel.player = this;
-        _creatorPanel.UpdatePlayerHealth(_currentHealth);
+
+        if (isLocal)
+        {
+            _creatorPanel = FindObjectOfType<CreatorPanel>();
+            _creatorPanel.player = this;
+            _creatorPanel.UpdatePlayerHealth(_currentHealth);
+        }
     }
 
     public bool ApplyDamage(int damage)
     {
         if (!isLocal) return false;
-        
+
         _currentHealth -= damage;
         _creatorPanel.UpdatePlayerHealth(_currentHealth);
 
@@ -38,7 +41,7 @@ public class PlayerBehaviour : MonoBehaviour
         {
             GameManager.Instance.Speak("Beware! Your health is running low.");
         }
-            
+
         if (_currentHealth <= 0)
         {
             // Death

@@ -1,6 +1,8 @@
+using System;
 using Oculus.Interaction.HandGrab;
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 namespace Hackathon.Commands
 {
@@ -26,6 +28,13 @@ namespace Hackathon.Commands
         private AimTargetCommand _aimTarget = null;
         private float _lastShot = 0f;
         private float _muzzleFlashesTimer;
+        private PhotonView _photonView;
+
+        private void Awake()
+        {
+            _photonView = GetComponent<PhotonView>();
+        }
+
         public ArmedUnitAttributes armedAttributes
         {
             get
