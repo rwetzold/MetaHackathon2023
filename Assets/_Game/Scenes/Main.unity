@@ -698,10 +698,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e11efa3c73f6c74492846e0d7123183, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  createEnemies: 0
   spawnPoint: {fileID: 261521628}
   spawnRules:
-  - prefab: {fileID: 1926569121695587139, guid: b1cfdd31add80b048ba08e24342b34d0,
-      type: 3}
+  - prefab: 
     initialDelay: 0
     delay: 2
   ownerPlayer: {fileID: 0}
