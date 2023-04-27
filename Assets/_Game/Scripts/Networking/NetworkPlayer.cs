@@ -3,16 +3,21 @@ using Photon.Pun;
 
 namespace Hackathon
 {
-    public class NetworkPlayer : MonoBehaviour, IPunObservable
+    public class NetworkPlayer : MonoBehaviour, IPunObservable, IPunInstantiateMagicCallback
     {
+        public bool createAvatars;
         public GameObject headPrefab, leftPrefab, rightPrefab;
         private Transform head, right, left, body;
         private PhotonView photonView;
 
-        private void Start()
+        private void Awake()
         {
             photonView = GetComponent<PhotonView>();
-            if (!photonView.IsMine)
+        }
+
+        private void Start()
+        {
+            if (!photonView.IsMine && createAvatars)
             {
                 body = new GameObject("Player" + photonView.CreatorActorNr).transform;
                 head = headPrefab == null
@@ -55,6 +60,11 @@ namespace Hackathon
         private void OnDisable()
         {
             if (body != null) Destroy(body.gameObject);
+        }
+
+        public void OnPhotonInstantiate(PhotonMessageInfo info)
+        {
+            if (!photonView.IsMine) GameManager.Instance.remotePlayer = GetComponent<PlayerBehaviour>();
         }
     }
 }

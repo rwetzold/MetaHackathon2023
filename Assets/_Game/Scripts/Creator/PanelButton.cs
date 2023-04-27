@@ -14,7 +14,7 @@ public class PanelButton : MonoBehaviour
 
     private void Awake()
     {
-        _creatorPanel = GetComponentInParent<CreatorPanel>();
+        _creatorPanel = GetComponentInParent<CreatorPanel>(true);
         _camera = Camera.main;
     }
 
@@ -23,8 +23,7 @@ public class PanelButton : MonoBehaviour
     {
         if (_creatorPanel.player.TryPay(_price))
         {
-            GameObject unit = PhotonNetwork.Instantiate(_prefab, _camera.transform.TransformPoint(_cameraOffset),
-                Quaternion.identity);
+            GameObject unit = PhotonNetwork.Instantiate(_prefab, _camera.transform.TransformPoint(_cameraOffset), Quaternion.identity);
             unit.GetComponent<UnitBehaviour>().ownerPlayer = _creatorPanel.player;
         }
     }
