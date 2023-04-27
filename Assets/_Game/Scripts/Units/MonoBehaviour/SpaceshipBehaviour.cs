@@ -7,24 +7,18 @@ namespace Hackathon
 {
     public class SpaceshipBehaviour : UnitBehaviour, IPunInstantiateMagicCallback
     {
-        [SerializeField]
-        private PlayerBehaviour _target;
+        [SerializeField] private PlayerBehaviour _target;
         private NavMeshAgent _navMeshAgent;
         private int _currentHealth = 0;
         public int currentHealth => _currentHealth;
-        [SerializeField]
-        public GameObject _damagePhase01;
-        [SerializeField]
-        public GameObject _damagePhase02;
+        [SerializeField] public GameObject _damagePhase01;
+        [SerializeField] public GameObject _damagePhase02;
 
-        [SerializeField]
-        public GameObject _damagePhase03;
+        [SerializeField] public GameObject _damagePhase03;
 
-        [SerializeField]
-        public GameObject _damageDeath;
+        [SerializeField] public GameObject _damageDeath;
 
-        [SerializeField]
-        public GameObject _body;
+        [SerializeField] public GameObject _body;
 
         public SpaceshipAttributes spaceshipAttributes
         {
@@ -39,6 +33,7 @@ namespace Hackathon
 
         // Temp
         public FactoryBehaviour _factory;
+
         public void SetTarget(PlayerBehaviour targetPlayer)
         {
             _target = targetPlayer;
@@ -46,7 +41,6 @@ namespace Hackathon
 
         private void OnEnable()
         {
-           
             if (_navMeshAgent == null)
             {
                 _navMeshAgent = GetComponent<NavMeshAgent>();
@@ -59,10 +53,9 @@ namespace Hackathon
             }
 
             _currentHealth = spaceshipAttributes.HealthValue;
-        
         }
 
-        void Update()
+        private void Update()
         {
             if (_target != null)
             {
@@ -71,23 +64,21 @@ namespace Hackathon
                 _navMeshAgent.SetDestination(targetPos);
                 Vector3 offset = targetPos - transform.position;
                 float dist = offset.sqrMagnitude;
-                if (dist<1f)
-                { 
+                if (dist < 2f)
+                {
                     if (_target != null && _target != ownerPlayer)
                     {
                         Commands.HitPlayerCommand hitPlayer = new Commands.HitPlayerCommand(this, _target);
                         hitPlayer.Execute();
                     }
                 }
-
             }
-
         }
 
         public bool ApplyDamage(int damage)
         {
             _currentHealth -= damage;
-            if (_currentHealth <= spaceshipAttributes.HealthValue/4*3)
+            if (_currentHealth <= spaceshipAttributes.HealthValue / 4 * 3)
             {
                 if (_currentHealth <= spaceshipAttributes.HealthValue / 4 * 2)
                 {
@@ -121,12 +112,11 @@ namespace Hackathon
                     _damagePhase03.SetActive(false);
                     _damageDeath.SetActive(false);
                 }
-
             }
             else
             {
-
             }
+
             return false;
         }
 
@@ -157,5 +147,3 @@ namespace Hackathon
         }
     }
 }
-
-
