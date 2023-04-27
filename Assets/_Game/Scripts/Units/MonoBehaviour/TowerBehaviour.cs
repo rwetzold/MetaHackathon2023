@@ -56,13 +56,8 @@ namespace Hackathon.Commands
 
                 if (_aimTarget.nextTarget != null)
                 {
-                    Vector3 oldRotation = _cannonRotator.eulerAngles;
-                    _cannonRotator.LookAt(_aimTarget.nextTarget.transform);
-                    _cannonRotator.eulerAngles = new Vector3(_cannonRotator.eulerAngles.x, oldRotation.y, oldRotation.z);
-
-                    oldRotation = _turret.eulerAngles;
-                    _turret.LookAt(_aimTarget.nextTarget.transform);
-                    _turret.eulerAngles = new Vector3(oldRotation.x, _turret.eulerAngles.y + 180, oldRotation.z);
+                    LookAtX(_aimTarget.nextTarget.transform,_cannonRotator);
+                    LookAtY(_aimTarget.nextTarget.transform, _turret);
 
                     if (Time.time - _lastShot > armedAttributes.FireRageValue)
                     {
@@ -73,6 +68,24 @@ namespace Hackathon.Commands
                     }
                 }
             }
+        }
+
+        void LookAtY(Transform target, Transform viewer)
+        {
+            Vector3 lookPos = target.position - viewer.transform.position;
+            Quaternion lookRot = Quaternion.LookRotation(lookPos, Vector3.up);
+            float eulerY = lookRot.eulerAngles.y;
+            Quaternion rotation = Quaternion.Euler(0, eulerY, 0);
+            viewer.rotation = rotation;
+        }
+
+        void LookAtX(Transform target, Transform viewer)
+        {
+            Vector3 lookPos = target.position - viewer.transform.position;
+            Quaternion lookRot = Quaternion.LookRotation(lookPos, Vector3.up);
+            float eulerX = lookRot.eulerAngles.x;
+            Quaternion rotation = Quaternion.Euler(eulerX, 0, 0);
+            viewer.rotation = rotation;
         }
 
         private void OnCollisionEnter(Collision collision)
