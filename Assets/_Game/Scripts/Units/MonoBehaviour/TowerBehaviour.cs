@@ -1,27 +1,20 @@
-using System;
 using Oculus.Interaction.HandGrab;
-using System.Collections;
-using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
+
 namespace Hackathon.Commands
 {
-    public class TowerBehaviour : UnitBehaviour
+    public class TowerBehaviour : UnitBehaviour, IPunInstantiateMagicCallback
     {
-        [SerializeField]
-        private HandGrabInteractable _interactable, _inverseInteractable;
+        [SerializeField] private HandGrabInteractable _interactable, _inverseInteractable;
 
-        [SerializeField]
-        private Transform _cannonRotator;
+        [SerializeField] private Transform _cannonRotator;
 
-        [SerializeField]
-        private Transform _turret;
+        [SerializeField] private Transform _turret;
 
-        [SerializeField]
-        private GameObject _muzzleFlashes;
+        [SerializeField] private GameObject _muzzleFlashes;
 
-        [SerializeField]
-        private Animator _animator;
+        [SerializeField] private Animator _animator;
 
         private bool _towerActiv = false;
 
@@ -88,7 +81,7 @@ namespace Hackathon.Commands
             float oldEulerZ = viewer.eulerAngles.z;
 
             viewer.LookAt(target /*new Vector3(viewer.position.x, target.position.y, viewer.position.z)*/);
-            viewer.eulerAngles = new Vector3(oldEulerX, viewer.eulerAngles.y+180, oldEulerZ);
+            viewer.eulerAngles = new Vector3(oldEulerX, viewer.eulerAngles.y + 180, oldEulerZ);
         }
 
         void LookAtX(Transform target, Transform viewer)
@@ -114,6 +107,11 @@ namespace Hackathon.Commands
                 _interactable.gameObject.SetActive(false);
                 _inverseInteractable.gameObject.SetActive(false);
             }
+        }
+
+        public void OnPhotonInstantiate(PhotonMessageInfo info)
+        {
+            ownerPlayer = GameManager.Instance.remotePlayer;
         }
     }
 }

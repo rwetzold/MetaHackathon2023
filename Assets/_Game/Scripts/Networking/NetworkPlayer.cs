@@ -41,19 +41,27 @@ namespace Hackathon
             {
                 stream.SendNext(GameManager.Instance.playerHead.position);
                 stream.SendNext(GameManager.Instance.playerHead.eulerAngles);
-                stream.SendNext(GameManager.Instance.leftHand.position);
-                stream.SendNext(GameManager.Instance.leftHand.eulerAngles);
-                stream.SendNext(GameManager.Instance.rightHand.position);
-                stream.SendNext(GameManager.Instance.rightHand.eulerAngles);
+                if (createAvatars)
+                {
+                    stream.SendNext(GameManager.Instance.leftHand.position);
+                    stream.SendNext(GameManager.Instance.leftHand.eulerAngles);
+                    stream.SendNext(GameManager.Instance.rightHand.position);
+                    stream.SendNext(GameManager.Instance.rightHand.eulerAngles);
+                }
             }
             else
             {
-                head.position = (Vector3)stream.ReceiveNext();
-                head.eulerAngles = (Vector3)stream.ReceiveNext();
-                left.position = (Vector3)stream.ReceiveNext();
-                left.eulerAngles = (Vector3)stream.ReceiveNext();
-                right.position = (Vector3)stream.ReceiveNext();
-                right.eulerAngles = (Vector3)stream.ReceiveNext();
+                transform.position = (Vector3)stream.ReceiveNext();
+                transform.eulerAngles = (Vector3)stream.ReceiveNext();
+                if (createAvatars)
+                {
+                    head.position = transform.position;
+                    head.eulerAngles = transform.eulerAngles;
+                    left.position = (Vector3)stream.ReceiveNext();
+                    left.eulerAngles = (Vector3)stream.ReceiveNext();
+                    right.position = (Vector3)stream.ReceiveNext();
+                    right.eulerAngles = (Vector3)stream.ReceiveNext();
+                }
             }
         }
 

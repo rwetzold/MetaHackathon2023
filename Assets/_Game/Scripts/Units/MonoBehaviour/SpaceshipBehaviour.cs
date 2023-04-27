@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 namespace Hackathon
 {
-    public class SpaceshipBehaviour : UnitBehaviour
+    public class SpaceshipBehaviour : UnitBehaviour, IPunInstantiateMagicCallback
     {
         [SerializeField]
         private PlayerBehaviour _target;
@@ -151,8 +151,9 @@ namespace Hackathon
             gameObject.SetActive(false);
         }
 
-        void OnCollisionEnter(Collision collision)
+        public void OnPhotonInstantiate(PhotonMessageInfo info)
         {
+            ownerPlayer = GameManager.Instance.remotePlayer;
         }
     }
 }

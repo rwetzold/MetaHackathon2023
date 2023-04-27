@@ -70,6 +70,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 687fa9c827a79be4bad689aed73f3e9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  createAvatars: 0
   headPrefab: {fileID: 2201382855110362415, guid: a2b207c99d6b6bc4da1de9d689c3bef5,
     type: 3}
   leftPrefab: {fileID: 7271330210785046165, guid: a723d712652a0434f92d450305e1bf4c,
