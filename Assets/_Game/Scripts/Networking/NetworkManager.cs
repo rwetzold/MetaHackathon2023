@@ -126,7 +126,14 @@ namespace Hackathon
             }
 
             GameObject go = PhotonNetwork.Instantiate("NetworkPlayer", Vector3.zero, Quaternion.identity);
-            GameManager.Instance.remotePlayer = go.GetComponent<PlayerBehaviour>();
+            if (photonView.IsMine)
+            {
+                go.GetComponent<PlayerBehaviour>().isLocal = true;
+            }
+            else
+            {
+                GameManager.Instance.remotePlayer = go.GetComponent<PlayerBehaviour>();
+            }
 
             GameObject sceneCaptureController = GameObject.Find("SceneModel");
             if (sceneCaptureController)

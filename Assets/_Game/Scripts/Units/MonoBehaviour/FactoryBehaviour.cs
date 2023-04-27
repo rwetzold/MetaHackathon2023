@@ -62,6 +62,7 @@ namespace Hackathon
             _spaceshipPool[0].SetActive(true);
             _spaceshipPool[0].transform.position = transform.TransformPoint(FactoryAttributes.LocalSpawnPosition);
             _spaceshipPool[0].transform.forward = -transform.forward;
+            _spaceshipPool[0].GetComponent<SpaceshipBehaviour>().SetTarget(_target);
             _spaceshipPool.ShiftList();
         }
 

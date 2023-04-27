@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerBehaviour : MonoBehaviour
 {
-    [SerializeField] private bool isLocal;
+    public bool isLocal;
     [SerializeField] private PlayerAttributes _playerScriptable;
 
     private CreatorPanel _creatorPanel;
@@ -29,6 +29,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     public bool ApplyDamage(int damage)
     {
+        if (!isLocal) return false;
+        
         _currentHealth -= damage;
         _creatorPanel.UpdatePlayerHealth(_currentHealth);
 
@@ -49,6 +51,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void AddCurrency(int coins)
     {
+        if (!isLocal) return;
+
         _currentCurrency += coins;
     }
 
