@@ -12,7 +12,8 @@ namespace Hackathon
 {
     public class NetworkManager : MonoBehaviourPunCallbacks
     {
-        private const string ROOM_NAME = "towAR defense";
+        public string roomName = "towAR defense";
+
         private const int UuidSize = 16;
         private const string UserIdsKey = "userids";
         private const char Separator = ',';
@@ -147,7 +148,7 @@ namespace Hackathon
         {
             RoomOptions roomOptions = new() { IsVisible = true, MaxPlayers = 16, EmptyRoomTtl = 0, PlayerTtl = 300000 };
 
-            PhotonNetwork.JoinOrCreateRoom(ROOM_NAME, roomOptions, TypedLobby.Default);
+            PhotonNetwork.JoinOrCreateRoom(roomName, roomOptions, TypedLobby.Default);
         }
 
         public override void OnPlayerEnteredRoom(Player newPlayer)
