@@ -264,9 +264,9 @@ MonoBehaviour:
   onMultiValueEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1010122968}
-        m_TargetAssemblyTypeName: Hackathon.GameManager, Assembly-CSharp
-        m_MethodName: CreateTowerCommand
+      - m_Target: {fileID: 1809702836}
+        m_TargetAssemblyTypeName: PanelButton, Assembly-CSharp
+        m_MethodName: ButtonPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2055,7 +2055,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66fdc1b14e80f4a4abbd151f02c95280, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomName: towAR defense
+  roomName: towAR defense2
   OnPlayersReady:
     m_PersistentCalls:
       m_Calls:
@@ -2740,6 +2740,18 @@ Transform:
   m_Father: {fileID: 599349038}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1242261190 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5357228171670920234, guid: 4339be885155daf43b0ae2ea08166c45,
+    type: 3}
+  m_PrefabInstance: {fileID: 470563768}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f21797621270c6d4982748ecb1db64bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1270145630
 GameObject:
   m_ObjectHideFlags: 0
@@ -3185,6 +3197,18 @@ MonoBehaviour:
   sceneViewId: 2
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &1809702836 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4330529197057884784, guid: 4339be885155daf43b0ae2ea08166c45,
+    type: 3}
+  m_PrefabInstance: {fileID: 470563768}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f21797621270c6d4982748ecb1db64bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1837327921
 GameObject:
   m_ObjectHideFlags: 0
@@ -3238,9 +3262,9 @@ MonoBehaviour:
   onMultiValueEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1010122968}
-        m_TargetAssemblyTypeName: Hackathon.GameManager, Assembly-CSharp
-        m_MethodName: CreateFactoryCommand
+      - m_Target: {fileID: 1242261190}
+        m_TargetAssemblyTypeName: PanelButton, Assembly-CSharp
+        m_MethodName: ButtonPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3295,6 +3319,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2104140685}
   - component: {fileID: 2104140686}
+  - component: {fileID: 2104140687}
   m_Layer: 0
   m_Name: Voice
   m_TagString: Untagged
@@ -3445,10 +3470,10 @@ MonoBehaviour:
         m_Calls: []
   witRuntimeConfiguration:
     witConfiguration: {fileID: 11400000, guid: be26bbf0ea9dd3441a3296bb2ed8440b, type: 2}
-    minKeepAliveVolume: 0.0005
-    minKeepAliveTimeInSeconds: 2
+    minKeepAliveVolume: 0.01
+    minKeepAliveTimeInSeconds: 9.9
     minTranscriptionKeepAliveTimeInSeconds: 1
-    maxRecordingTime: 20
+    maxRecordingTime: 9.9
     soundWakeThreshold: 0.0005
     sampleLengthInMs: 10
     micBufferLengthInSeconds: 1
@@ -3459,6 +3484,20 @@ MonoBehaviour:
     preferredActivationOffset: -0.5
   usePlatformServices: 0
   enableConsoleLogging: 0
+--- !u!114 &2104140687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2104140684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd74d7c0b8e9f96498eeba2c1d6831f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interval: 10
+  ape: {fileID: 2104140686}
 --- !u!1 &2108629052
 GameObject:
   m_ObjectHideFlags: 0
