@@ -1,3 +1,4 @@
+using Oculus.Interaction.HandGrab;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,9 @@ namespace Hackathon.Commands
 {
     public class TowerBehaviour : UnitBehaviour
     {
+        [SerializeField]
+        private HandGrabInteractable _interactable, _inverseInteractable;
+
         [SerializeField]
         private Transform _cannonRotator;
 
@@ -71,5 +75,18 @@ namespace Hackathon.Commands
             }
         }
 
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.CompareTag("Plane"))
+            {
+                var eulerRotation = transform.eulerAngles;
+                eulerRotation.x = 0;
+                eulerRotation.z = 0;
+                transform.rotation = Quaternion.Euler(eulerRotation);
+                _towerActiv = true;
+                _interactable.gameObject.SetActive(false);
+                _inverseInteractable.gameObject.SetActive(false);
+            }
+        }
     }
 }

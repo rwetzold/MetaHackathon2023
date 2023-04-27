@@ -372,10 +372,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ownerPlayer: {fileID: 0}
   _attributes: {fileID: 11400000, guid: eb0de0f6601d7624194b8c5c46df032e, type: 2}
+  _interactable: {fileID: 8217276042935105430}
+  _inverseInteractable: {fileID: 4921149533361334}
   _cannonRotator: {fileID: 6740605593955123183}
   _turret: {fileID: 9114853157808749478}
   _muzzleFlashes: {fileID: 1900795197528132469}
-  testPlayer: {fileID: 0}
 --- !u!1 &5088639044925883595
 GameObject:
   m_ObjectHideFlags: 0
@@ -622,8 +623,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 622db80eec0bd344f920b1aa056ae8d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _relativeTo: {fileID: 2183103226877995343}
   _surface: {fileID: 0}
+  _relativeTo: {fileID: 2183103226877995343}
   _usesHandPose: 1
   _handPose:
     _handedness: 0
@@ -723,8 +724,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 622db80eec0bd344f920b1aa056ae8d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _relativeTo: {fileID: 2183103226877995343}
   _surface: {fileID: 0}
+  _relativeTo: {fileID: 2183103226877995343}
   _usesHandPose: 1
   _handPose:
     _handedness: 1
